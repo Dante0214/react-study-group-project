@@ -48,6 +48,7 @@ const LoginPage = () => {
                 </Typography>
                 <Box className="loginFormBox" component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
+                        color="warning"
                         margin="normal"
                         required
                         fullWidth
@@ -61,6 +62,7 @@ const LoginPage = () => {
                         inputRef={emailInputRef}
                     />
                     <TextField
+                        color="warning"
                         margin="normal"
                         required
                         fullWidth
@@ -73,7 +75,7 @@ const LoginPage = () => {
                         onChange={handlePasswordChange}
                         inputRef={passwordInputRef}
                     />
-                    <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="아이디 기억하기" />
+                    <FormControlLabel control={<Checkbox value="remember" color="warning" />} label="아이디 기억하기" />
                     <Button
                         type="submit"
                         fullWidth
@@ -87,7 +89,7 @@ const LoginPage = () => {
                             <Link
                                 href="#"
                                 variant="body2"
-                                sx={{ color: `var(--color-primary)`, textDecoration: 'none' }}
+                                sx={{ color: `var(--color-text-primary)`, textDecoration: 'none' }}
                             >
                                 비밀번호를 잊으셨나요?
                             </Link>
@@ -96,7 +98,7 @@ const LoginPage = () => {
                             <Link
                                 href="#"
                                 variant="body2"
-                                sx={{ color: `var(--color-primary)`, textDecoration: 'none' }}
+                                sx={{ color: `var(--color-text-primary)`, textDecoration: 'none' }}
                             >
                                 회원가입
                             </Link>
