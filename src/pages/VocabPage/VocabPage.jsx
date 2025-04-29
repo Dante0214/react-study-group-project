@@ -110,61 +110,101 @@ const VocabPage = () => {
   };
 
   return (
-    <Container sx={{ py: 5 }}>
-      <Typography variant="h4" gutterBottom>
-        📚 단어장
-      </Typography>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={clearChecked}
-          disabled={checkedVocab.length === 0}
+    <Box
+      sx={{
+        backgroundColor: "var(--color-background-alt)",
+        minHeight: "100vh",
+        py: 5,
+      }}
+    >
+      <Container>
+        <Box
+          sx={{
+            backgroundColor: "var(--color-background)",
+            boxShadow: 3,
+            borderRadius: 2,
+            p: 4,
+            borderColor: "var(--color-border)",
+          }}
         >
-          전체 선택 해제
-        </Button>
-      </Box>
-      {checkedList.length === 0 ? (
-        <Typography>저장된 단어가 없습니다.</Typography>
-      ) : (
-        //단어 렌더링 브레이크 포인트 따라 3,2,1
-        <Grid container spacing={2} mt={4}>
-          {checkedList.map((item) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.word || item.id}>
-              <Card variant="outlined">
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                    }}
+          <Typography variant="h4" gutterBottom>
+            📚 단어장
+          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={clearChecked}
+              disabled={checkedVocab.length === 0}
+            >
+              전체 선택 해제
+            </Button>
+          </Box>
+          {checkedList.length === 0 ? (
+            <Typography>저장된 단어가 없습니다.</Typography>
+          ) : (
+            //단어 렌더링 브레이크 포인트 따라 3,2,1
+            <Grid container spacing={2} mt={4}>
+              {checkedList.map((item) => (
+                <Grid
+                  size={{ xs: 12, sm: 6, md: 4 }}
+                  key={item.word || item.id}
+                >
+                  <Card
+                    variant="outlined"
+                    sx={{ borderColor: "var(--color-border)" }}
                   >
-                    <Typography variant="h6">{item.word}</Typography>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={checkedVocab.includes(item.word)}
-                          onChange={() => handleCheckboxChange(item.word)}
-                          color="primary"
+                    <CardContent>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "flex-start",
+                        }}
+                      >
+                        <Typography
+                          variant="h6"
+                          color="var(--color-text-primary)"
+                        >
+                          {item.word}
+                        </Typography>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              sx={{
+                                color: "var(--color-primary)",
+                                "&.Mui-checked": {
+                                  color: "var(--color-primary-dark)",
+                                },
+                              }}
+                              checked={checkedVocab.includes(item.word)}
+                              onChange={() => handleCheckboxChange(item.word)}
+                              color="var(--color-primary-dark)"
+                            />
+                          }
                         />
-                      }
-                    />
-                  </Box>
-                  <Typography color="text.secondary">{item.meaning}</Typography>
-                  <Typography sx={{ mt: 1, fontStyle: "italic" }}>
-                    {item.example}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-          {/* <Button variant="outlined" color="secondary" onClick={clearChecked}>
+                      </Box>
+                      <Typography color="var(--color-text-disabled)">
+                        {item.meaning}
+                      </Typography>
+                      <Typography
+                        color="var(--color-text-secondary)"
+                        sx={{ mt: 1, fontStyle: "italic" }}
+                      >
+                        {item.example}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+              {/* <Button variant="outlined" color="secondary" onClick={clearChecked}>
             전체 체크 해제
           </Button> */}
-        </Grid>
-      )}
-    </Container>
+            </Grid>
+          )}
+        </Box>
+      </Container>
+    </Box>
   );
 };
 export default VocabPage;
