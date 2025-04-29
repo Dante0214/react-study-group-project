@@ -1,0 +1,62 @@
+.main-page-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: var(--color-background);
+}
+
+.main-page-title {
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.main-page-description {
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.main-page-content {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+}
+
+.main-page-item {
+  flex: 1;
+  min-width: 0; /* 자식 요소가 부모 컨테이너를 넘치지 않도록 함 */
+  transition: all 0.3s ease;
+}
+
+.main-page-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 화면 크기가 900px 이하일 때 세로 배치로 변경 */
+@media screen and (max-width: 900px) {
+  .main-page-content {
+    flex-direction: column;
+  }
+  
+  .main-page-item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .main-page-item:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.main-page-item-full {
+  width: 100% !important;
+}
+
+
+
