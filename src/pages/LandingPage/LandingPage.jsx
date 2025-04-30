@@ -3,13 +3,14 @@ import "./LandingPage.style.css";
 import { Box, Button, Typography, Grid, Container } from "@mui/material";
 import bannerImg from "./images/banner.png";
 import LandingTextBox from "./components/LandingTextBox";
+import WavePattern from "./components/WavePattern";
 
 const LandingPage = () => {
   return (
     <Container
       maxWidth="md"
       sx={{
-        bgcolor: "var(--color-background)",
+        bgcolor: "var(--color-text-primary)",
         borderRadius: 4,
         p: 4,
         boxShadow: 3,
@@ -46,15 +47,33 @@ const LandingPage = () => {
           mt: 6,
         }}
       />
-      <Grid container spacing={2}>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <LandingTextBox type="ko" />
-        </Grid>
+      <Box sx={{ position: "relative", height: "300px", pb: 0 }}>
+        <Grid
+          container
+          spacing={2}
+          sx={{ position: "relative", zIndex: 2, height: "100%" }}
+          className="borders"
+        >
+          <Grid size={{ xs: 12, md: 6 }} sx={{ height: "100%" }}>
+            <LandingTextBox type="ko" />
+          </Grid>
 
-        <Grid size={{ xs: 12, md: 6 }}>
-          <LandingTextBox type="en" />
+          <Grid size={{ xs: 12, md: 6 }}>
+            <LandingTextBox type="en" />
+          </Grid>
         </Grid>
-      </Grid>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: -6,
+            left: 0,
+            width: "100%",
+            zIndex: 1,
+          }}
+        >
+          <WavePattern className="landing-wave" />
+        </Box>
+      </Box>
     </Container>
   );
 };

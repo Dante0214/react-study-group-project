@@ -22,13 +22,20 @@ const LandingTextBox = ({ type }) => {
   return (
     <Box
       sx={{
-        bgcolor: "#F7F8FC",
+        bgcolor: "rgba(247,248,252,0.50)",
         borderRadius: 2,
         p: 2,
         height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        position: "relative",
       }}
     >
-      <Typography fontWeight="bold" color="var(--color-text-primary)">
+      <Typography
+        fontWeight="bold"
+        color="var(--color-text-primary)"
+        sx={{ lineHeight: 4 }}
+      >
         {lines.map((line, index) => (
           <span key={index}>
             {line}
@@ -41,6 +48,9 @@ const LandingTextBox = ({ type }) => {
           variant="contained"
           sx={{
             mt: 2,
+            position: "absolute",
+            bottom: 20,
+            right: 20,
             fontWeight: "bold",
             color: "var(--color-text-primary)",
             bgcolor: "var(--color-primary)",
