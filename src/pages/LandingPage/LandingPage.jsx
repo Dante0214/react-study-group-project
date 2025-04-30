@@ -4,8 +4,13 @@ import { Box, Button, Typography, Grid, Container } from "@mui/material";
 import bannerImg from "./images/banner.png";
 import LandingTextBox from "./components/LandingTextBox";
 import WavePattern from "./components/WavePattern";
-
+import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
   return (
     <Container
       maxWidth="md"
@@ -19,6 +24,7 @@ const LandingPage = () => {
       }}
     >
       <Button
+        onClick={handleLoginClick}
         variant="contained"
         sx={{
           position: "absolute",
