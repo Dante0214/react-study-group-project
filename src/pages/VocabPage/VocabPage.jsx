@@ -95,19 +95,22 @@ const VocabPage = () => {
   // 초기에 목데이터 넣기
   useEffect(() => {
     setVocabList(mockVocabList);
-    const initialCheckedVocab = mockVocabList.map((item) => item.word);
+    const initialCheckedVocab = mockVocabList.map((item) => item.id);
 
     useVocabStore.setState({ checkedVocab: initialCheckedVocab });
   }, []);
 
   // 체크된 단어 정보만 필터링
   const checkedList = vocabList.filter((item) =>
-    checkedVocab.includes(item.word)
+    checkedVocab.includes(item.id)
   );
   // 체크박스 상태관리
-  const handleCheckboxChange = (word) => {
-    toggleChecked(word);
+  const handleCheckboxChange = (item) => {
+    toggleChecked(item);
   };
+
+  // console.log(checkedList);
+  // console.log(checkedVocab);
 
   return (
     <Box
@@ -144,15 +147,12 @@ const VocabPage = () => {
             <Typography>저장된 단어가 없습니다.</Typography>
           ) : (
             //단어 렌더링 브레이크 포인트 따라 3,2,1
-            <Grid container spacing={2} mt={4}>
+            <Grid container spacing={2} mt={4} alignItems="stretch">
               {checkedList.map((item) => (
-                <Grid
-                  size={{ xs: 12, sm: 6, md: 4 }}
-                  key={item.word || item.id}
-                >
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.id}>
                   <Card
                     variant="outlined"
-                    sx={{ borderColor: "var(--color-border)" }}
+                    sx={{ borderColor: "var(--color-border)", height: "100%" }}
                   >
                     <CardContent>
                       <Box
@@ -177,8 +177,8 @@ const VocabPage = () => {
                                   color: "var(--color-primary-dark)",
                                 },
                               }}
-                              checked={checkedVocab.includes(item.word)}
-                              onChange={() => handleCheckboxChange(item.word)}
+                              checked={checkedVocab.includes(item.id)}
+                              onChange={() => handleCheckboxChange(item.id)}
                               color="var(--color-primary-dark)"
                             />
                           }
