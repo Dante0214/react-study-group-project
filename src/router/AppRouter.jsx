@@ -4,7 +4,7 @@ import LandingPage from "../pages/LandingPage/LandingPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import MainPage from "../pages/MainPage/MainPage";
 import VocabPage from "../pages/VocabPage/VocabPage";
-import AppLayout from "../layouts/AppLayout";
+import AppLayout from "../layouts/AppLayout/AppLayout";
 import PrivateRoute from "./PrivateRoute";
 
 const AppRouter = () => {
