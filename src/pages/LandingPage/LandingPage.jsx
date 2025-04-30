@@ -5,12 +5,20 @@ import bannerImg from "./images/banner.png";
 import LandingTextBox from "./components/LandingTextBox";
 import WavePattern from "./components/WavePattern";
 import { useNavigate } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 const LandingPage = () => {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width:425px)");
 
   const handleLoginClick = () => {
     navigate("/login");
   };
+
+  const handleStartClick = () => {
+    console.log("어디로..");
+  };
+
   return (
     <Container
       maxWidth="md"
@@ -21,6 +29,7 @@ const LandingPage = () => {
         boxShadow: 3,
         position: "relative",
         mt: 6,
+        mb: 6,
       }}
     >
       <Button
@@ -40,6 +49,23 @@ const LandingPage = () => {
       >
         로그인
       </Button>
+      {isMobile && (
+        <Button
+          variant="contained"
+          onClick={handleStartClick}
+          sx={{
+            position: "absolute",
+            top: 16,
+            right: 100,
+            bgcolor: "var(--color-primary)",
+            color: "var(--color-text-primary)",
+            fontWeight: "bold",
+            zIndex: 10,
+          }}
+        >
+          Get started
+        </Button>
+      )}
       <Box
         component="img"
         src={bannerImg}
@@ -53,7 +79,7 @@ const LandingPage = () => {
           mt: 6,
         }}
       />
-      <Box sx={{ position: "relative", height: "300px", pb: 0 }}>
+      <Box sx={{ position: "relative", pb: 0 }}>
         <Grid
           container
           spacing={2}

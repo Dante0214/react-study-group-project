@@ -45,6 +45,7 @@ const LandingTextBox = ({ type }) => {
       </Typography>
       {type === "en" && (
         <Button
+          className="get-started-btn"
           variant="contained"
           sx={{
             mt: 2,
@@ -54,6 +55,7 @@ const LandingTextBox = ({ type }) => {
             fontWeight: "bold",
             color: "var(--color-text-primary)",
             bgcolor: "var(--color-primary)",
+            display: { xs: "none", sm: "block" },
             "&hover": {
               bgcolor: "var(--color primary-dark)",
             },
