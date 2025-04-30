@@ -86,6 +86,12 @@ const mockVocabList = [
     meaning: "애도하다",
     example: "They lamented the loss of their friend.",
   },
+  {
+    id: 13,
+    word: "lament",
+    meaning: "애도하다",
+    example: "They lamented the loss of their friend.",
+  },
 ];
 
 const VocabPage = () => {
@@ -95,19 +101,24 @@ const VocabPage = () => {
   // 초기에 목데이터 넣기
   useEffect(() => {
     setVocabList(mockVocabList);
-    const initialCheckedVocab = mockVocabList.map((item) => item.word);
 
-    useVocabStore.setState({ checkedVocab: initialCheckedVocab });
+    const initialCheckedIds = mockVocabList
+      .slice(0, 11)
+      .map((vocab) => vocab.id);
+
+    useVocabStore.setState({ checkedVocab: initialCheckedIds });
   }, []);
 
-  // 체크된 단어 정보만 필터링
-  const checkedList = vocabList.filter((item) =>
-    checkedVocab.includes(item.word)
+  const checkedWords = vocabList.filter((vocab) =>
+    checkedVocab.includes(vocab.id)
   );
+
   // 체크박스 상태관리
-  const handleCheckboxChange = (word) => {
-    toggleChecked(word);
+  const handleCheckboxChange = (item) => {
+    toggleChecked(item);
   };
+  console.log(checkedWords);
+  console.log(checkedVocab);
 
   return (
     <Box
@@ -140,16 +151,13 @@ const VocabPage = () => {
               전체 선택 해제
             </Button>
           </Box>
-          {checkedList.length === 0 ? (
+          {checkedWords.length === 0 ? (
             <Typography>저장된 단어가 없습니다.</Typography>
           ) : (
             //단어 렌더링 브레이크 포인트 따라 3,2,1
             <Grid container spacing={2} mt={4}>
-              {checkedList.map((item) => (
-                <Grid
-                  size={{ xs: 12, sm: 6, md: 4 }}
-                  key={item.word || item.id}
-                >
+              {vocabList.map((item) => (
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.id}>
                   <Card
                     variant="outlined"
                     sx={{ borderColor: "var(--color-border)" }}
@@ -177,8 +185,8 @@ const VocabPage = () => {
                                   color: "var(--color-primary-dark)",
                                 },
                               }}
-                              checked={checkedVocab.includes(item.word)}
-                              onChange={() => handleCheckboxChange(item.word)}
+                              checked={checkedVocab.includes(item.id)}
+                              onChange={() => handleCheckboxChange(item)}
                               color="var(--color-primary-dark)"
                             />
                           }

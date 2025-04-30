@@ -5,6 +5,7 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import MainPage from "../pages/MainPage/MainPage";
 import VocabPage from "../pages/VocabPage/VocabPage";
 import AppLayout from "../layouts/AppLayout";
+import VocabTestPage from "../pages/Testpage/VocaTestPage";
 
 const AppRouter = () => {
   return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/vocab" element={<VocabPage />} />
+        <Route path="/test" element={<VocabTestPage />} />
       </Route>
 
       {/* 잘못된 경로 접근 시 랜딩페이지 리다이렉트 */}

@@ -6,13 +6,14 @@ export const useVocabStore = create((set) => ({
 
   setVocabList: (newList) => set({ vocabList: newList }),
 
-  toggleChecked: (word) =>
+  // 값의 id를 비교하게 수정
+  toggleChecked: (wordobj) =>
     set((state) => {
-      const isChecked = state.checkedVocab.includes(word);
+      const isChecked = state.checkedVocab.includes(wordobj.id);
       return {
         checkedVocab: isChecked
-          ? state.checkedVocab.filter((item) => item !== word)
-          : [...state.checkedVocab, word],
+          ? state.checkedVocab.filter((id) => id !== wordobj.id)
+          : [...state.checkedVocab, wordobj.id],
       };
     }),
 
