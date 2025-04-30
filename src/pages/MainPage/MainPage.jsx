@@ -34,7 +34,10 @@ const MainPage = () => {
     title: "",
     content: "",
     date: "",
-    source: ""
+    source: {
+      name: "",
+      url: ""
+    }
   };
   
   // newsText가 있을 때만 JSON 파싱 시도
