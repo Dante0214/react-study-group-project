@@ -21,7 +21,9 @@ const MainPage = () => {
       "url": "기사 출처 URL"
     }
   }
-  내용만 주고, 다른 텍스트나 코드블럭, 백틱 등을 절대 추가하지 마.
+  반드시 텍스트로만 제공하세요.
+  받은 응답은 텍스트로 json 형식으로 파싱할 것이므로
+  다른 텍스트나 코드블럭이나 백틱을 출력하지 마세요.
   `;
 
   const { data: webSearchData, isLoading: webSearchLoading } =
