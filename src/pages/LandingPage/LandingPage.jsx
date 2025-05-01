@@ -4,10 +4,7 @@ import { Box, Button, Typography, Grid, Container } from "@mui/material";
 import bannerImg from "./images/landing-page-book.png";
 import mainPageImg from "./images/main-page-img.png";
 import vocaPageImg from "./images/voca-page-img.png";
-// import LandingTextBox from "./components/LandingTextBox";
-// import WavePattern from "./components/WavePattern";
 import { useNavigate } from "react-router-dom";
-// import useMediaQuery from "@mui/material/useMediaQuery";
 import LandingCardItem from "./components/LandingCardItem";
 import InfoIcon from "@mui/icons-material/Info";
 import StarIcon from "@mui/icons-material/Star";
@@ -50,6 +47,7 @@ const LandingPage = () => {
 
   return (
     <div className="landing-body">
+      <ScrollToTopButton />
       <Container
         maxWidth="md"
         disableGutters
@@ -214,7 +212,6 @@ const LandingPage = () => {
           />
         </DialogContent>
       </Dialog>
-      <ScrollToTopButton />
     </div>
   );
 };
