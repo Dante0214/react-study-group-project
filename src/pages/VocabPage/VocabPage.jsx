@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./VocabPage.style.css";
 import {
   Box,
   Button,
   Card,
   CardContent,
-  Checkbox,
   Container,
-  FormControlLabel,
   Grid,
+  Stack,
+  TextField,
   Typography,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useVocabStore } from "../../stores/vocabStore";
 
 const mockVocabList = [
@@ -89,8 +90,11 @@ const mockVocabList = [
 ];
 
 const VocabPage = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchInputRef = useRef("");
   const { vocabList, setVocabList, checkedVocab, toggleChecked, clearChecked } =
     useVocabStore();
+  // 검색 실행 함수
 
   // 초기에 목데이터 넣기
   useEffect(() => {
@@ -104,9 +108,27 @@ const VocabPage = () => {
   const checkedList = vocabList.filter((item) =>
     checkedVocab.includes(item.id)
   );
+  // 단어 혹은 뜻 검색
+  const searchedList = checkedList.filter(
+    (item) =>
+      item.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.meaning.includes(searchQuery)
+  );
+
   // 체크박스 상태관리
   const handleCheckboxChange = (item) => {
     toggleChecked(item);
+  };
+  // 검색 실행 함수
+  const executeSearch = () => {
+    setSearchQuery(searchInputRef.current.value);
+  };
+
+  // 엔터키 이벤트 처리
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      executeSearch();
+    }
   };
 
   // console.log(checkedList);
@@ -133,22 +155,55 @@ const VocabPage = () => {
           <Typography variant="h4" gutterBottom>
             📚 단어장
           </Typography>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            justifyContent="space-between"
+            alignItems="stretch"
+            sx={{ mb: 2 }}
+          >
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={2}
+              justifyContent="space-between"
+              alignItems="stretch"
+              sx={{ mb: 2 }}
+            >
+              <TextField
+                placeholder="단어 검색"
+                variant="outlined"
+                size="small"
+                inputRef={searchInputRef}
+                defaultValue=""
+                onKeyDown={handleKeyPress}
+                sx={{ mr: 1 }}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={executeSearch}
+                startIcon={<SearchIcon />}
+              >
+                검색
+              </Button>
+            </Stack>
             <Button
               variant="outlined"
               color="secondary"
               onClick={clearChecked}
               disabled={checkedVocab.length === 0}
             >
-              전체 선택 해제
+              전체 삭제
             </Button>
-          </Box>
-          {checkedList.length === 0 ? (
+          </Stack>
+
+          {searchedList.length === 0 ? (
             <Typography>저장된 단어가 없습니다.</Typography>
           ) : (
             //단어 렌더링 브레이크 포인트 따라 3,2,1
             <Grid container spacing={2} mt={4} alignItems="stretch">
-              {checkedList.map((item) => (
+              {searchedList.map((item) => (
                 <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.id}>
                   <Card
                     variant="outlined"
@@ -168,21 +223,19 @@ const VocabPage = () => {
                         >
                           {item.word}
                         </Typography>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              sx={{
-                                color: "var(--color-primary)",
-                                "&.Mui-checked": {
-                                  color: "var(--color-primary-dark)",
-                                },
-                              }}
-                              checked={checkedVocab.includes(item.id)}
-                              onChange={() => handleCheckboxChange(item.id)}
-                              color="var(--color-primary-dark)"
-                            />
-                          }
-                        />
+                        <Button
+                          variant="text"
+                          sx={{
+                            color: "var(--color-primary)",
+                            "&:hover": {
+                              color: "var(--color-primary-dark)",
+                              backgroundColor: "transparent",
+                            },
+                          }}
+                          onClick={() => handleCheckboxChange(item.id)}
+                        >
+                          삭제
+                        </Button>
                       </Box>
                       <Typography color="var(--color-text-disabled)">
                         {item.meaning}
@@ -197,9 +250,6 @@ const VocabPage = () => {
                   </Card>
                 </Grid>
               ))}
-              {/* <Button variant="outlined" color="secondary" onClick={clearChecked}>
-            전체 체크 해제
-          </Button> */}
             </Grid>
           )}
         </Box>
