@@ -169,9 +169,22 @@ const VocabPage = () => {
             borderColor: "var(--color-border)",
           }}
         >
-          <Typography variant="h4" onClick={handleNavigate} gutterBottom>
-            📚 단어장
-          </Typography>
+          <Button
+            variant="text" // 텍스트 형태의 버튼
+            color="inherit" // 부모의 텍스트 색상 상속
+            onClick={handleNavigate}
+            sx={{
+              p: 0,
+              m: 0,
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+            }}
+          >
+            <Typography variant="h4" gutterBottom>
+              📚 단어장
+            </Typography>
+          </Button>
           <VocabSearchBar
             searchInputRef={searchInputRef}
             onSearch={executeSearch}
