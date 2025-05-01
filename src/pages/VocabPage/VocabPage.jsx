@@ -144,7 +144,7 @@ const VocabPage = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "var(--color-background-alt)",
+        backgroundColor: "var(--color-background)",
         minHeight: "100vh",
         py: 5,
       }}
@@ -152,7 +152,7 @@ const VocabPage = () => {
       <Container>
         <Box
           sx={{
-            backgroundColor: "var(--color-background)",
+            backgroundColor: "var(--color-background-alt)",
             boxShadow: 3,
             borderRadius: 2,
             p: 4,
@@ -186,12 +186,7 @@ const VocabPage = () => {
           />
 
           {searchedList.length === 0 ? (
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              height="300px"
-            >
+            <Box display="flex" justifyContent="center" alignItems="center">
               <Typography>저장된 단어가 없습니다.</Typography>
             </Box>
           ) : (
