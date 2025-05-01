@@ -13,6 +13,9 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useVocabStore } from "../../stores/vocabStore";
+import VocabSearchBar from "./components/VocabSearchBar";
+import VocaCard from "./components/VocaCard";
+import { useNavigate } from "react-router-dom";
 
 const mockVocabList = [
   {
@@ -90,11 +93,12 @@ const mockVocabList = [
 ];
 
 const VocabPage = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef("");
+  const [isTest, setIsTest] = useState(false);
   const { vocabList, setVocabList, checkedVocab, toggleChecked, clearChecked } =
     useVocabStore();
-  // 검색 실행 함수
 
   // 초기에 목데이터 넣기
   useEffect(() => {
@@ -116,7 +120,7 @@ const VocabPage = () => {
   );
 
   // 체크박스 상태관리
-  const handleCheckboxChange = (item) => {
+  const handleDelete = (item) => {
     toggleChecked(item);
   };
   // 검색 실행 함수
@@ -129,6 +133,19 @@ const VocabPage = () => {
     if (e.key === "Enter") {
       executeSearch();
     }
+  };
+
+  //테스트모드 상태관리
+  const toggleTestMode = () => {
+    setIsTest((prev) => !prev);
+  };
+
+  const handleNavigate = () => {
+    if (searchInputRef.current) {
+      searchInputRef.current.value = ""; //입력값 초기화
+    }
+    setSearchQuery(""); // 검색 상태 초기화
+    navigate("/vocab");
   };
 
   // console.log(checkedList);
@@ -152,51 +169,18 @@ const VocabPage = () => {
             borderColor: "var(--color-border)",
           }}
         >
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h4" onClick={handleNavigate} gutterBottom>
             📚 단어장
           </Typography>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={2}
-            justifyContent="space-between"
-            alignItems="stretch"
-            sx={{ mb: 2 }}
-          >
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={2}
-              justifyContent="space-between"
-              alignItems="stretch"
-              sx={{ mb: 2 }}
-            >
-              <TextField
-                placeholder="단어 검색"
-                variant="outlined"
-                size="small"
-                inputRef={searchInputRef}
-                defaultValue=""
-                onKeyDown={handleKeyPress}
-                sx={{ mr: 1 }}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={executeSearch}
-                startIcon={<SearchIcon />}
-              >
-                검색
-              </Button>
-            </Stack>
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={clearChecked}
-              disabled={checkedVocab.length === 0}
-            >
-              전체 삭제
-            </Button>
-          </Stack>
+          <VocabSearchBar
+            searchInputRef={searchInputRef}
+            onSearch={executeSearch}
+            onTestToggle={toggleTestMode}
+            isTest={isTest}
+            handleKeyPress={handleKeyPress}
+            onClear={clearChecked}
+            hasItems={checkedVocab.length > 0}
+          />
 
           {searchedList.length === 0 ? (
             <Typography>저장된 단어가 없습니다.</Typography>
@@ -205,49 +189,7 @@ const VocabPage = () => {
             <Grid container spacing={2} mt={4} alignItems="stretch">
               {searchedList.map((item) => (
                 <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.id}>
-                  <Card
-                    variant="outlined"
-                    sx={{ borderColor: "var(--color-border)", height: "100%" }}
-                  >
-                    <CardContent>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "flex-start",
-                        }}
-                      >
-                        <Typography
-                          variant="h6"
-                          color="var(--color-text-primary)"
-                        >
-                          {item.word}
-                        </Typography>
-                        <Button
-                          variant="text"
-                          sx={{
-                            color: "var(--color-primary)",
-                            "&:hover": {
-                              color: "var(--color-primary-dark)",
-                              backgroundColor: "transparent",
-                            },
-                          }}
-                          onClick={() => handleCheckboxChange(item.id)}
-                        >
-                          삭제
-                        </Button>
-                      </Box>
-                      <Typography color="var(--color-text-disabled)">
-                        {item.meaning}
-                      </Typography>
-                      <Typography
-                        color="var(--color-text-secondary)"
-                        sx={{ mt: 1, fontStyle: "italic" }}
-                      >
-                        {item.example}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+                  <VocaCard item={item} onDelete={handleDelete} />
                 </Grid>
               ))}
             </Grid>
