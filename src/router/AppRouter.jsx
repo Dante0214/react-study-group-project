@@ -10,10 +10,9 @@ import PrivateRoute from "./PrivateRoute";
 const AppRouter = () => {
   return (
     <Routes>
-      {/* 랜딩페이지 */}
-      <Route path='/' element={<LandingPage />} />
-
       <Route element={<AppLayout />}>
+        {/* 랜딩페이지 */}
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
 
         <Route element={<PrivateRoute />}>
@@ -23,7 +22,7 @@ const AppRouter = () => {
       </Route>
 
       {/* 잘못된 경로 접근 시 랜딩페이지 리다이렉트 */}
-      <Route path='*' element={<Navigate to='/' replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
