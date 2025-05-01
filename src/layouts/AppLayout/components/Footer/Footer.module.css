@@ -2,6 +2,7 @@
   background: var(--color-background-alt);
   color: var(--color-text-primary);
   padding: 30px 30px 40px;
+  margin-top: 40px;
   display: flex;
   justify-content: space-between;
 }
