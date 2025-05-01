@@ -9,73 +9,73 @@ import { useNavigate } from "react-router-dom";
 
 const mockVocabList = [
   {
-    id: 1,
+    class: "명사",
     word: "abandon",
     meaning: "버리다",
     example: "He abandoned the project.",
   },
   {
-    id: 2,
+    class: "명사",
     word: "benevolent",
     meaning: "자비로운",
     example: "She was a benevolent leader.",
   },
   {
-    id: 3,
+    class: "명사",
     word: "contemplate",
     meaning: "숙고하다",
     example: "He contemplated his future.",
   },
   {
-    id: 4,
+    class: "명사",
     word: "diligent",
     meaning: "근면한",
     example: "She is a diligent worker.",
   },
   {
-    id: 5,
+    class: "명사",
     word: "eloquent",
     meaning: "능변의",
     example: "He gave an eloquent speech.",
   },
   {
-    id: 6,
+    class: "명사",
     word: "fervent",
     meaning: "열렬한",
     example: "She had a fervent desire to succeed.",
   },
   {
-    id: 7,
+    class: "명사",
     word: "grave",
     meaning: "심각한",
     example: "This is a grave situation.",
   },
   {
-    id: 8,
+    class: "명사",
     word: "hilarious",
     meaning: "매우 재미있는",
     example: "The movie was hilarious.",
   },
   {
-    id: 9,
+    class: "명사",
     word: "immense",
     meaning: "거대한",
     example: "The building is of immense size.",
   },
   {
-    id: 10,
+    class: "명사",
     word: "jubilant",
     meaning: "기뻐하는",
     example: "The team was jubilant after winning.",
   },
   {
-    id: 11,
+    class: "명사",
     word: "keen",
     meaning: "날카로운",
     example: "He has a keen intellect.",
   },
   {
-    id: 12,
+    class: "명사",
     word: "lament",
     meaning: "애도하다",
     example: "They lamented the loss of their friend.",
@@ -87,31 +87,24 @@ const VocabPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef("");
   const [isTest, setIsTest] = useState(false);
-  const { vocabList, setVocabList, checkedVocab, toggleChecked, clearChecked } =
+  const { myVocabList, setMyVocabList, deleteMyVocab, clearMyVocabList } =
     useVocabStore();
 
   // 초기에 목데이터 넣기
   useEffect(() => {
-    setVocabList(mockVocabList);
-    const initialCheckedVocab = mockVocabList.map((item) => item.id);
+    setMyVocabList(mockVocabList);
+  }, [setMyVocabList]);
 
-    useVocabStore.setState({ checkedVocab: initialCheckedVocab });
-  }, []);
-
-  // 체크된 단어 정보만 필터링
-  const checkedList = vocabList.filter((item) =>
-    checkedVocab.includes(item.id)
-  );
   // 단어 혹은 뜻 검색
-  const searchedList = checkedList.filter(
+  const searchedList = myVocabList.filter(
     (item) =>
       item.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.meaning.includes(searchQuery)
   );
 
-  // 체크박스 상태관리
+  // 삭제 핸들러
   const handleDelete = (item) => {
-    toggleChecked(item);
+    deleteMyVocab(item);
   };
   // 검색 실행 함수
   const executeSearch = () => {
@@ -145,7 +138,6 @@ const VocabPage = () => {
     <Box
       sx={{
         backgroundColor: "var(--color-background)",
-        minHeight: "100vh",
         py: 5,
       }}
     >
@@ -157,6 +149,7 @@ const VocabPage = () => {
             borderRadius: 2,
             p: 4,
             borderColor: "var(--color-border)",
+            minHeight: "60vh",
           }}
         >
           <Button
@@ -181,28 +174,31 @@ const VocabPage = () => {
             onTestToggle={toggleTestMode}
             isTest={isTest}
             handleKeyPress={handleKeyPress}
-            onClear={clearChecked}
-            hasItems={checkedVocab.length > 0}
+            onClear={clearMyVocabList}
+            hasItems={myVocabList.length > 0}
           />
 
           {searchedList.length === 0 ? (
             <Box
+              mt={4}
               display="flex"
               justifyContent="center"
               alignItems="center"
-              minHeight="300px"
+              minHeight="30vh"
             >
               <Typography>저장된 단어가 없습니다.</Typography>
             </Box>
           ) : (
             //단어 렌더링 브레이크 포인트 따라 3,2,1
-            <Grid container spacing={2} mt={4} alignItems="stretch">
-              {searchedList.map((item) => (
-                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.id}>
-                  <VocaCard item={item} onDelete={handleDelete} />
-                </Grid>
-              ))}
-            </Grid>
+            <Box minHeight="30vh">
+              <Grid container spacing={2} mt={4} alignItems="stretch">
+                {searchedList.map((item) => (
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.word}>
+                    <VocaCard item={item} onDelete={handleDelete} />
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           )}
         </Box>
       </Container>

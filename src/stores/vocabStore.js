@@ -1,21 +1,22 @@
 import { create } from "zustand";
 
+//myVocabList 안에 단어 예시
+// {
+//   name: "apple",
+//   meaning: "사과",
+//   class: "명사",
+//   example: "I like apple.",
+// }
+
 export const useVocabStore = create((set) => ({
-  vocabList: [], // 단어 리스트 저장
-  checkedVocab: [], // 체크한 단어만 저장
+  myVocabList: [], // 단어 목록 (예시 단어 객체 구조에 맞게 저장)
 
-  setVocabList: (newList) => set({ vocabList: newList }),
+  setMyVocabList: (newList) => set({ myVocabList: newList }), // 단어 목록 설정
 
-  //word의 중복 가능성이 있으므로 id 값으로 비교
-  toggleChecked: (id) =>
-    set((state) => {
-      const isChecked = state.checkedVocab.includes(id);
-      return {
-        checkedVocab: isChecked
-          ? state.checkedVocab.filter((item) => item !== id)
-          : [...state.checkedVocab, id],
-      };
-    }),
+  deleteMyVocab: (wordName) =>
+    set((state) => ({
+      myVocabList: state.myVocabList.filter((item) => item.name !== wordName), // 단어 삭제 (단어를 기준으로)
+    })),
 
-  clearChecked: () => set({ checkedVocab: [] }), // 체크한 단어 초기화
+  clearMyVocabList: () => set({ myVocabList: [] }), // 단어장 초기화
 }));
