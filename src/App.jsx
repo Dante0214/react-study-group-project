@@ -1,7 +1,18 @@
-import "./App.css";
-import AppRouter from "./router/AppRouter";
+import { useEffect } from 'react';
+import './App.css';
+import AppRouter from './router/AppRouter';
+import useAuthStore from './stores/authStore';
 
 function App() {
+  const { isLoggedIn } = useAuthStore();
+  console.log('🚀 ~ App ~ isLoggedIn:', isLoggedIn);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      localStorage.removeItem('auth-storage');
+    }
+  }, []);
+
   return <AppRouter />;
 }
 
