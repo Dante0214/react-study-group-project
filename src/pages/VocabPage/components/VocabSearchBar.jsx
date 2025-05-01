@@ -31,7 +31,11 @@ const VocabSearchBar = ({
       <Button
         variant="outlined"
         color="secondary"
-        onClick={onClear}
+        onClick={() => {
+          if (window.confirm("정말 전체 삭제하시겠습니까?")) {
+            onClear();
+          }
+        }}
         disabled={!hasItems}
       >
         전체 삭제
