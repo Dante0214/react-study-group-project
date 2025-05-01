@@ -189,7 +189,7 @@ const VocabPage = () => {
             <Box minHeight="30vh">
               <Grid container spacing={2} mt={4} alignItems="stretch">
                 {searchedList.map((item) => (
-                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.word}>
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.name}>
                     <VocaCard item={item} onDelete={handleDelete} />
                   </Grid>
                 ))}
