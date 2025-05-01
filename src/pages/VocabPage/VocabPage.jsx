@@ -186,7 +186,12 @@ const VocabPage = () => {
           />
 
           {searchedList.length === 0 ? (
-            <Box display="flex" justifyContent="center" alignItems="center">
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              minHeight="300px"
+            >
               <Typography>저장된 단어가 없습니다.</Typography>
             </Box>
           ) : (
