@@ -172,7 +172,7 @@ const LandingPage = () => {
               component="img"
               src={vocaPageImg}
               alt="단어장페이지"
-              onClick={() => setOpenImage(mainPageImg)}
+              onClick={() => setOpenImage(vocaPageImg)}
               sx={{
                 cursor: "pointer",
                 width: { xs: "100%", sm: 300 },
