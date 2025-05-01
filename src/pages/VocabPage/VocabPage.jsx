@@ -87,24 +87,20 @@ const VocabPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef("");
   const [isTest, setIsTest] = useState(false);
-  const { myVocabList, setMyVocabList, deleteMyVocab, clearMyVocabList } =
-    useVocabStore();
+  const { myVocabList, deleteMyVocab, clearMyVocabList } = useVocabStore();
 
   // 초기에 목데이터 넣기
-  useEffect(() => {
-    setMyVocabList(mockVocabList);
-  }, [setMyVocabList]);
 
   // 단어 혹은 뜻 검색
   const searchedList = myVocabList.filter(
     (item) =>
-      item.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.meaning.includes(searchQuery)
   );
 
   // 삭제 핸들러
   const handleDelete = (item) => {
-    deleteMyVocab(item);
+    deleteMyVocab(item.name, item.meaning);
   };
   // 검색 실행 함수
   const executeSearch = () => {
@@ -133,7 +129,7 @@ const VocabPage = () => {
 
   // console.log(checkedList);
   // console.log(checkedVocab);
-
+  console.log(myVocabList);
   return (
     <Box
       sx={{

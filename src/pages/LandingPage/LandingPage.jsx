@@ -64,7 +64,7 @@ const LandingPage = () => {
           position: "relative",
         }}
       >
-        <Box sx={{ width: "100%", position: "absolute", top: 0, left: 25 }}>
+        <Box sx={{ position: "absolute", top: 0, left: 25 }}>
           <Button
             variant="contained"
             onClick={handleStartClick}
