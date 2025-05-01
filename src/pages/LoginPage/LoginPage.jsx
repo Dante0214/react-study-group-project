@@ -31,7 +31,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { isLoggedIn, setLogin } = useAuthStore();
 
-  // 로그인 상태이면 메인 페이지로 리디렉트f
+  // 로그인 상태이면 메인 페이지로 리디렉트
   if (isLoggedIn) {
     return <Navigate to="/main" replace />;
   }
