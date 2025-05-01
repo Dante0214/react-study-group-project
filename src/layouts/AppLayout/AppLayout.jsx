@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 const AppLayout = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
@@ -18,6 +19,7 @@ const AppLayout = () => {
     <div>
       <Header isMobile={isMobile} />
       <Outlet />
+      <Footer />
     </div>
   );
 };

@@ -1,0 +1,43 @@
+.words-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.words-title {
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  color: var(--color-text-primary) !important;
+  margin: 0 !important;
+}
+
+.save-all-button {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-primary) !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+  padding: 6px 16px !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+}
+
+.save-all-button:hover {
+  background-color: var(--color-primary-dark) !important;
+}
+
+.word-count-badge .MuiBadge-badge {
+  top: -8px;
+  right: -8px;
+  font-weight: bold;
+  color: white;
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .words-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+} 

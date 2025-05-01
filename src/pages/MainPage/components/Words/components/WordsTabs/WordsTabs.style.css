@@ -1,0 +1,25 @@
+.words-tabs {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.words-tabs .MuiTabs-indicator {
+  transition: all 0.3s ease;
+}
+
+.word-tab {
+  transition: all 0.2s ease !important;
+}
+
+.active-tab {
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 600px) {
+  .word-tab {
+    font-size: 14px !important;
+    min-width: 80px !important;
+    padding: 8px 0 !important;
+  }
+} 
