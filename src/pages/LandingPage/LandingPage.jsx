@@ -13,6 +13,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import StarIcon from "@mui/icons-material/Star";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Dialog, DialogContent } from "@mui/material";
+import ScrollToTopButton from "../../common/components/Buttons/ScrollToTopButton";
 
 const cardData = [
   {
@@ -213,6 +214,7 @@ const LandingPage = () => {
           />
         </DialogContent>
       </Dialog>
+      <ScrollToTopButton />
     </div>
   );
 };
