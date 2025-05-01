@@ -1,20 +1,24 @@
 import { create } from "zustand";
 
+//myVocabList 안에 단어 예시
+// {
+//   word: "apple",
+//   meaning: "사과",
+//   class: "명사",
+//   example: "I like apple.",
+// }
+
+
+
 export const useVocabStore = create((set) => ({
-  vocabList: [], // 단어 리스트 저장
-  checkedVocab: [], // 체크한 단어만 저장
+  myVocabList: [],
 
-  setVocabList: (newList) => set({ vocabList: newList }),
+  setMyVocabList: (newList) => set((state) => ({ myVocabList: newList })),
 
-  toggleChecked: (word) =>
-    set((state) => {
-      const isChecked = state.checkedVocab.includes(word);
-      return {
-        checkedVocab: isChecked
-          ? state.checkedVocab.filter((item) => item !== word)
-          : [...state.checkedVocab, word],
-      };
-    }),
+  deleteMyVocab: (word) =>
+    set((state) => ({
+      myVocabList: state.myVocabList.filter((item) => item !== word),
+    })),
 
-  clearChecked: () => set({ checkedVocab: [] }), // 체크한 단어 초기화
+  clearMyVocabList: () => set({ myVocabList: [] }),
 }));
