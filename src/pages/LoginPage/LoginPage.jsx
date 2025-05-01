@@ -72,11 +72,19 @@ const LoginPage = () => {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container
+            component="main"
+            maxWidth="xs"
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '90vh',
+            }}
+        >
             <Box
                 sx={{
-                    marginTop: 11,
-                    marginBottom: 11,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
