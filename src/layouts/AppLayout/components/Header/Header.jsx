@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
-import logo from '../../../../assets/yeonguk-logo.png';
+import logo from '../../../../assets/ddalkkak.png';
 import Navbar from '../Navbar/Navbar';
 import LoginIcon from '@mui/icons-material/Login';
 import MenuIcon from '@mui/icons-material/Menu';
