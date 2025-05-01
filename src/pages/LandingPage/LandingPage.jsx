@@ -4,14 +4,15 @@ import { Box, Button, Typography, Grid, Container } from "@mui/material";
 import bannerImg from "./images/landing-page-book.png";
 import mainPageImg from "./images/main-page-img.png";
 import vocaPageImg from "./images/voca-page-img.png";
-import LandingTextBox from "./components/LandingTextBox";
-import WavePattern from "./components/WavePattern";
+// import LandingTextBox from "./components/LandingTextBox";
+// import WavePattern from "./components/WavePattern";
 import { useNavigate } from "react-router-dom";
-import useMediaQuery from "@mui/material/useMediaQuery";
+// import useMediaQuery from "@mui/material/useMediaQuery";
 import LandingCardItem from "./components/LandingCardItem";
 import InfoIcon from "@mui/icons-material/Info";
 import StarIcon from "@mui/icons-material/Star";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { Dialog, DialogContent } from "@mui/material";
 
 const cardData = [
   {
@@ -38,6 +39,7 @@ const cardData = [
 ];
 
 const LandingPage = () => {
+  const [openImage, setOpenImage] = React.useState(null);
   const navigate = useNavigate();
   // const isMobile = useMediaQuery("(max-width:425px)");
 
@@ -51,10 +53,9 @@ const LandingPage = () => {
         maxWidth="md"
         disableGutters
         sx={{
-          height: "90vh",
+          height: "90dvh",
           display: "flex",
           flexDirection: "column",
-          overflow: "hidden",
           borderRadius: 4,
           boxShadow: 3,
           p: 0,
@@ -90,6 +91,8 @@ const LandingPage = () => {
             justifyContent: "center",
             alignItems: "center",
             p: 4,
+            borderTopLeftRadius: 16,
+            borderTopRightRadius: 16,
           }}
         >
           <Grid
@@ -122,6 +125,8 @@ const LandingPage = () => {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "center",
             alignItems: "center",
+            borderBottomLeftRadius: 16,
+            borderBottomRightRadius: 16,
             gap: 3,
             px: 4,
             py: 3,
@@ -133,12 +138,19 @@ const LandingPage = () => {
               component="img"
               src={mainPageImg}
               alt="메인페이지"
+              onClick={() => setOpenImage(mainPageImg)}
               sx={{
+                cursor: "pointer",
                 width: { xs: "100%", sm: 300 },
                 height: 200,
                 borderRadius: 3,
                 boxShadow: 3,
                 mb: 1,
+                transition: "all 0.3s ease-in-out",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: 6,
+                },
               }}
             />
             <Typography
@@ -156,12 +168,19 @@ const LandingPage = () => {
               component="img"
               src={vocaPageImg}
               alt="단어장페이지"
+              onClick={() => setOpenImage(mainPageImg)}
               sx={{
+                cursor: "pointer",
                 width: { xs: "100%", sm: 300 },
                 height: 200,
                 borderRadius: 3,
                 boxShadow: 3,
                 mb: 1,
+                transition: "all 0.3s ease-in-out",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: 6,
+                },
               }}
             />
             <Typography
@@ -174,6 +193,26 @@ const LandingPage = () => {
           </Box>
         </Box>
       </Container>
+      {/* 미리보기 모달 */}
+      <Dialog
+        open={Boolean(openImage)}
+        onClose={() => setOpenImage(null)}
+        maxWidth="md"
+      >
+        <DialogContent sx={{ p: 0 }}>
+          <Box
+            component="img"
+            src={openImage}
+            alt="미리보기 이미지"
+            sx={{
+              width: "100%",
+              height: "auto",
+              maxHeight: "80vh",
+              objectFit: "contain",
+            }}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
