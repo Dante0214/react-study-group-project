@@ -52,7 +52,8 @@ const LandingPage = () => {
         maxWidth="md"
         disableGutters
         sx={{
-          height: "90dvh",
+          height: "100%",
+
           display: "flex",
           flexDirection: "column",
           borderRadius: 4,
