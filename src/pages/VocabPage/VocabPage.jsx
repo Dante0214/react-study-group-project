@@ -186,7 +186,14 @@ const VocabPage = () => {
           />
 
           {searchedList.length === 0 ? (
-            <Typography>저장된 단어가 없습니다.</Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              height="300px"
+            >
+              <Typography>저장된 단어가 없습니다.</Typography>
+            </Box>
           ) : (
             //단어 렌더링 브레이크 포인트 따라 3,2,1
             <Grid container spacing={2} mt={4} alignItems="stretch">
