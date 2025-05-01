@@ -27,7 +27,7 @@ const VocaCard = ({ item, onDelete }) => {
                 backgroundColor: "transparent",
               },
             }}
-            onClick={() => onDelete(item.id)}
+            onClick={() => onDelete(item.word)}
           >
             삭제
           </Button>
