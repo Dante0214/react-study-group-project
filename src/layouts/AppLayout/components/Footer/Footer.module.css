@@ -1,52 +1,71 @@
 .footer {
-  display: flex;
   background: var(--color-background-alt);
-  margin-top: auto;
-  padding: 50px;
-  margin-top: 60px;
-}
-
-.logo-container {
-  flex-grow: 1;
+  color: var(--color-text-primary);
+  padding: 30px 30px 40px;
   display: flex;
-  align-items: start;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-.logo-image {
-  width: 200px;
+.about-content {
+  margin: 0;
 }
 
-.github-link-container {
-  flex-grow: 1;
+.about-content:last-child {
+  margin-top: 5px;
 }
 
-.github-icon-container {
+.features-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.github-icon {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--color-text-primary);
-  font-weight: bold;
+  margin: 18.72px 0;
+}
+
+.github-icon-text {
+  font-size: 18.72px;
+  font-weight: 600;
 }
 
 .github-link-list {
   list-style: none;
   padding: 0;
-  margin: 10px 0 0 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 
 .github-link-item {
   color: var(--color-text-primary);
+  text-decoration: none;
   font-weight: bold;
 }
 
 .github-link {
   color: var(--color-text-disabled);
+  text-decoration: none;
 }
 
 .github-link:hover {
   color: var(--color-text-primary);
+}
+
+@media all and (max-width: 576px) {
+  .footer {
+    flex-direction: column;
+    gap: 20px;
+    font-size: 12px;
+  }
+
+  .github-icon-text {
+    font-size: 14.04px;
+  }
 }
