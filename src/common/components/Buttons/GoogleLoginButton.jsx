@@ -11,16 +11,17 @@ const GoogleLoginButton = ({ onClick }) => {
         borderRadius: 2,
         py: 1.2,
         px: 2,
+        border: "1px solid var(--color-primary)",
         textTransform: "none",
-        bgcolor: "#fff",
+        bgcolor: "var(--color-background)",
+        color: "var(--color-text-primary)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         gap: 1.5,
-        zIndex: 100,
         fontWeight: "bold",
         "&:hover": {
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "var(--color-primary-light)",
         },
       }}
     >
