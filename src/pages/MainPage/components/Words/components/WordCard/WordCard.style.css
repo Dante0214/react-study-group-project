@@ -1,0 +1,129 @@
+.word-item {
+  border-radius: 8px !important;
+  border: 1px solid var(--color-border) !important;
+  background-color: var(--color-background) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  margin-bottom: 0 !important;
+  transition: all 0.3s ease !important;
+  overflow: hidden !important;
+}
+
+.word-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  border-color: var(--color-primary-light) !important;
+}
+
+.word-item-content {
+  padding: 18px !important;
+}
+
+.word-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.word-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.word-text {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: var(--color-primary-dark) !important;
+  margin: 0 !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.word-text:hover {
+  color: var(--color-primary) !important;
+}
+
+.sound-emoji {
+  margin-left: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.sound-emoji:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.word-checkbox {
+  padding: 0 !important;
+  color: var(--color-primary) !important;
+  transition: transform 0.2s ease !important;
+}
+
+.word-checkbox:hover {
+  transform: scale(1.1);
+}
+
+.word-save-icon {
+  font-size: 22px;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+  color: var(--color-text-secondary);
+}
+
+.word-save-icon-checked {
+  opacity: 1;
+  color: var(--color-primary) !important;
+}
+
+.part-of-speech {
+  color: var(--color-text-secondary) !important;
+  font-size: 14px !important;
+  margin-bottom: 6px !important;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.word-meaning {
+  font-size: 15px !important;
+  color: var(--color-text-primary) !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.01em;
+  margin-bottom: 4px !important;
+}
+
+.word-class {
+  font-size: 14px !important;
+  color: var(--color-text-secondary) !important;
+  opacity: 0.8;
+  margin-right: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-primary-light);
+  padding: 2px 4px;
+}
+
+.word-example {
+  font-size: 14px !important;
+  color: var(--color-text-secondary) !important;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+  .word-item-content {
+    padding: 14px !important;
+  }
+  
+  .word-text {
+    font-size: 16px !important;
+  }
+  
+  .word-meaning {
+    font-size: 14px !important;
+  }
+} 

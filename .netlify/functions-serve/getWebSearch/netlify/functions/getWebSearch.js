@@ -12898,7 +12898,7 @@ var getWebSearchResponse = async (prompt) => {
     console.log("OpenAI API \uD638\uCD9C \uC2DC\uC791...");
     console.log("OpenAI \uD074\uB77C\uC774\uC5B8\uD2B8:", client_default);
     const response = await client_default.responses.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4.1",
       tools: [{ type: "web_search_preview" }],
       input: prompt
     });
