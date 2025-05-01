@@ -32,7 +32,7 @@ const WordsList = ({
               <WordCard 
                 key={word?.name}
                 word={word}
-                isSaved={!!savedWords[word?.name]}
+                isSaved={savedWords.includes(word?.name)}
                 onSave={onSaveWord}
                 onPlaySound={onPlaySound}
                 setHoveredWord={setHoveredWord}
@@ -54,7 +54,7 @@ const WordsList = ({
               <WordCard 
                 key={idiom?.name}
                 word={idiom}
-                isSaved={!!savedWords[idiom?.name]}
+                isSaved={savedWords.includes(idiom?.name)}
                 onSave={onSaveWord}
                 onPlaySound={onPlaySound}
                 setHoveredWord={setHoveredWord}
