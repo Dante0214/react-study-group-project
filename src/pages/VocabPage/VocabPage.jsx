@@ -1,17 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./VocabPage.style.css";
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+
 import { useVocabStore } from "../../stores/vocabStore";
 import VocabSearchBar from "./components/VocabSearchBar";
 import VocaCard from "./components/VocaCard";
