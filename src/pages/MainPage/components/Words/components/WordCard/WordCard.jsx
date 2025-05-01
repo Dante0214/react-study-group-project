@@ -50,7 +50,7 @@ const WordCard = ({ word, isSaved, onSave, onPlaySound, setHoveredWord }) => {
           </Box>
           <Checkbox
             checked={isSaved}
-            onChange={() => onSave(word.name)}
+            onChange={() => onSave(word)}
             className="word-checkbox"
             sx={{
               '&.Mui-checked': {

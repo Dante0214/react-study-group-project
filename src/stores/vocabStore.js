@@ -1,4 +1,8 @@
-import { create } from "zustand";
+
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+
 
 //myVocabList 안에 단어 예시
 // {
@@ -8,15 +12,40 @@ import { create } from "zustand";
 //   example: "I like apple.",
 // }
 
-export const useVocabStore = create((set) => ({
-  myVocabList: [], // 단어 목록 (예시 단어 객체 구조에 맞게 저장)
+export const useVocabStore = create(
+  persist(
+    (set, get) => ({
+      myVocabList: [],
 
-  setMyVocabList: (newList) => set({ myVocabList: newList }), // 단어 목록 설정
+      // ✅ (name + meaning) 기준 중복 제거하여 병합 저장
+      setMyVocabList: (newList) => {
+        const currentList = get().myVocabList;
 
-  deleteMyVocab: (wordName) =>
-    set((state) => ({
-      myVocabList: state.myVocabList.filter((item) => item.name !== wordName), // 단어 삭제 (단어를 기준으로)
-    })),
+        const merged = [...currentList, ...newList];
 
-  clearMyVocabList: () => set({ myVocabList: [] }), // 단어장 초기화
-}));
+        const uniqueByNameMeaning = merged.filter(
+          (word, index, self) =>
+            index === self.findIndex(
+              (w) => w.name === word.name && w.meaning === word.meaning
+            )
+        );
+
+        set({ myVocabList: uniqueByNameMeaning });
+      },
+
+      // ✅ (name + meaning) 기준 정확히 삭제
+      deleteMyVocab: (name, meaning) =>
+        set((state) => ({
+          myVocabList: state.myVocabList.filter(
+            (item) => !(item.name === name && item.meaning === meaning)
+          ),
+        })),
+
+      // ✅ 전체 초기화
+      clearMyVocabList: () => set({ myVocabList: [] }),
+    }),
+    {
+      name: "my-vocab-storage", // localStorage key
+    }
+  )
+);
