@@ -72,6 +72,11 @@ const LandingPage = () => {
               color: "var(--color-text-primary)",
               fontWeight: "bold",
               zIndex: 10,
+              transition: "all 0.3s ease-in-out",
+              "&:hover": {
+                transform: "scale(1.05)",
+                boxShadow: 6,
+              },
             }}
           >
             Get started
