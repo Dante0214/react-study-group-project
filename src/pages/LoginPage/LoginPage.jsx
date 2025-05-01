@@ -3,7 +3,6 @@ import {
     Container,
     Box,
     Button,
-    Typography,
     Link,
     FormControlLabel,
     IconButton,
@@ -21,6 +20,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import useAuthStore from '../../stores/authStore';
 import { Navigate, useNavigate } from 'react-router-dom';
+import GoogleLoginButton from './../../common/components/Buttons/GoogleLoginButton';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -75,7 +75,8 @@ const LoginPage = () => {
         <Container component="main" maxWidth="xs">
             <Box
                 sx={{
-                    marginTop: 8,
+                    marginTop: 11,
+                    marginBottom: 11,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -87,7 +88,7 @@ const LoginPage = () => {
                 {/* <Typography component="h1" variant="h5">
                     로그인
                 </Typography> */}
-                <Box className="loginFormBox" component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <Box className="loginFormBox" component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
                     <FormControl fullWidth required margin="normal" variant="outlined" color="warning">
                         <InputLabel htmlFor="email">이메일 주소</InputLabel>
                         <OutlinedInput
@@ -126,14 +127,18 @@ const LoginPage = () => {
                         />
                     </FormControl>
                     <FormControlLabel control={<Checkbox value="remember" color="warning" />} label="아이디 기억하기" />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2, backgroundColor: `var(--color-primary-light)` }}
-                    >
-                        로그인
-                    </Button>
+                    <Box sx={{ mt: 3, mb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ backgroundColor: `var(--color-primary-light)` }}
+                        >
+                            로그인
+                        </Button>
+
+                        <GoogleLoginButton />
+                    </Box>
                     <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
                         <Grid item xs>
                             <Link
