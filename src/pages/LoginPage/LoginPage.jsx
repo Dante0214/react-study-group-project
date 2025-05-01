@@ -80,7 +80,6 @@ const LoginPage = () => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '90vh',
             }}
         >
             <Box
