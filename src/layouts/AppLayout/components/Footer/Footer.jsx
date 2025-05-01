@@ -1,18 +1,38 @@
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Footer.module.css';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import logo from '../../../../assets/ddalkkak.png';
-import { Link } from 'react-router-dom';
+import { useIsMobile } from '../../../../hooks/useIsMobile';
 
 const Footer = () => {
+  const isMobile = useIsMobile();
+
+  const { pathname } = useLocation();
+
   return (
-    <footer className={styles['footer']}>
-      <div className={styles['logo-container']}>
-        <img src={logo} alt='logo' className={styles['logo-image']} />
+    <footer className={styles['footer']} style={{ marginTop: `${isMobile && pathname === '/' ? '330px' : '40px'}` }}>
+      <div className={styles['about']}>
+        <h3>습관이 되는 영어</h3>
+        <p className={styles['about-content']}>매일 흥미로운 영어 뉴스로 자연스럽게 키워지는 실력</p>
+        <p className={styles['about-content']}>AI가 도와주는 단어 정리와 언제든 꺼내볼 수 있는 손 안의 단어장</p>
       </div>
-      <div className={styles['github-link-container']}>
-        <div className={styles['github-icon-container']}>
-          <GitHubIcon sx={{ fontSize: '32px' }} />
-          <div>Github</div>
+      <div className={styles['features']}>
+        <h3>주요 기능</h3>
+        <ul className={styles['features-list']}>
+          <li className={'features-item'}>
+            <strong>AI 단어 정리 :</strong> 기사 속 핵심 단어와 표현을 자동 정리
+          </li>
+          <li className={'features-item'}>
+            <strong>손 안의 단어장 :</strong> 저장한 단어와 예문을 언제 어디서나 복습
+          </li>
+          <li className={'features-item'}>
+            <strong>매일 새로운 뉴스 :</strong> 관심 분야의 뉴스로 꾸준한 학습
+          </li>
+        </ul>
+      </div>
+      <div className={styles['github']}>
+        <div className={styles['github-icon']}>
+          <GitHubIcon sx={{ fontSize: { sm: '29px', xs: '22px' } }} />
+          <div className={styles['github-icon-text']}>Github</div>
         </div>
         <ul className={styles['github-link-list']}>
           <li className={styles['github-link-item']}>
