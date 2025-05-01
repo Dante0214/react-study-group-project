@@ -138,7 +138,6 @@ const VocabPage = () => {
     <Box
       sx={{
         backgroundColor: "var(--color-background)",
-        minHeight: "100vh",
         py: 5,
       }}
     >
@@ -150,6 +149,7 @@ const VocabPage = () => {
             borderRadius: 2,
             p: 4,
             borderColor: "var(--color-border)",
+            minHeight: "60vh",
           }}
         >
           <Button
@@ -180,22 +180,25 @@ const VocabPage = () => {
 
           {searchedList.length === 0 ? (
             <Box
+              mt={4}
               display="flex"
               justifyContent="center"
               alignItems="center"
-              minHeight="300px"
+              minHeight="30vh"
             >
               <Typography>저장된 단어가 없습니다.</Typography>
             </Box>
           ) : (
             //단어 렌더링 브레이크 포인트 따라 3,2,1
-            <Grid container spacing={2} mt={4} alignItems="stretch">
-              {searchedList.map((item) => (
-                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.word}>
-                  <VocaCard item={item} onDelete={handleDelete} />
-                </Grid>
-              ))}
-            </Grid>
+            <Box minHeight="30vh">
+              <Grid container spacing={2} mt={4} alignItems="stretch">
+                {searchedList.map((item) => (
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.word}>
+                    <VocaCard item={item} onDelete={handleDelete} />
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           )}
         </Box>
       </Container>
