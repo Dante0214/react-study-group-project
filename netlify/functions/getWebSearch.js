@@ -8,7 +8,7 @@ const getWebSearchResponse = async (prompt) => {
     
     // OpenAI 최신 API 호출
     const response = await client.responses.create({
-      model: "gpt-4o-mini", 
+      model: "gpt-4.1", 
       tools: [{ type: "web_search_preview" }],
       input: prompt,
     });

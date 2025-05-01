@@ -11,9 +11,54 @@ import {
 } from "@mui/material";
 import "./News.style.css";
 
-const News = ({ newsObject, topic, setTopic, isLoading }) => {
+const News = ({
+  newsObject,
+  topic,
+  setTopic,
+  isLoading,
+  hoveredWord,
+  loadNews,
+}) => {
   // 데이터가 제대로 있는지 확인
   const hasNewsData = newsObject && newsObject.title && newsObject.content;
+
+  // 본문에서 hoveredWord와 일치하는 부분을 하이라이트하는 함수
+  const highlightText = (text, wordToHighlight) => {
+    if (!text || !wordToHighlight) {
+      return text;
+    }
+
+    try {
+      // 대소문자 구분 없이 검색하기 위한 정규표현식
+      const regex = new RegExp(`(${wordToHighlight})`, "gi");
+
+      // 일치하는 부분을 찾아 배열로 분리
+      const parts = text.split(regex);
+
+      // 일치하는 부분에 styled span 추가
+      return parts.map((part, index) => {
+        if (part.toLowerCase() === wordToHighlight.toLowerCase()) {
+          return (
+            <span key={index} className="highlighted-word">
+              {part}
+            </span>
+          );
+        }
+        return <span key={index}>{part}</span>;
+      });
+    } catch (error) {
+      console.error("강조 처리 오류:", error);
+      return text;
+    }
+  };
+
+  // 버튼 클릭 핸들러
+  const handleLoadNewsClick = () => {
+    loadNews(topic);
+  };
+
+  // 토픽 표시 텍스트 (토픽이 Any인 경우 "오늘의" 표시)
+  const topicDisplayText = topic === "Any" ? "오늘의" : topic;
 
   return (
     <Box className="news-container">
@@ -33,9 +78,7 @@ const News = ({ newsObject, topic, setTopic, isLoading }) => {
             label="Topic"
             variant="outlined"
           >
-            <MenuItem value="Any">
-              <em>Any</em>
-            </MenuItem>
+            <MenuItem value="Any">Any</MenuItem>
             <MenuItem value="IT">IT</MenuItem>
             <MenuItem value="Politics">Politics</MenuItem>
             <MenuItem value="Economy">Economy</MenuItem>
@@ -58,15 +101,21 @@ const News = ({ newsObject, topic, setTopic, isLoading }) => {
         ) : hasNewsData ? (
           <div className="news-content-container">
             <h2 className="news-content-title">{newsObject.title}</h2>
-            <p className="news-content-text">{newsObject.content}</p>
+            <p className="news-content-text">
+              {highlightText(newsObject.content, hoveredWord)}
+            </p>
             <div className="news-content-footer">
               <span>
                 <p className="news-date">{newsObject.date}</p>
               </span>
               <span>
-                <span className="news-source">{newsObject.source.name}</span>
-                {' '}
-                <a href={newsObject.source.url} className="news-source-link">
+                <span className="news-source">{newsObject.source.name}</span>{" "}
+                <a
+                  href={newsObject.source.url}
+                  className="news-source-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   링크
                 </a>
               </span>
@@ -80,9 +129,13 @@ const News = ({ newsObject, topic, setTopic, isLoading }) => {
           </Box>
         )}
       </Box>
-      <Button className="news-button" variant="contained">
+      <Button
+        className="news-button"
+        variant="contained"
+        onClick={handleLoadNewsClick}
+      >
         <span className="button-icon">🗞️</span>
-        오늘의 기사 불러오기
+        {topicDisplayText} 기사 불러오기
       </Button>
     </Box>
   );
