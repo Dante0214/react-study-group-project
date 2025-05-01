@@ -1,6 +1,6 @@
 .nav {
   flex-grow: 1;
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
 .link-list {
@@ -19,10 +19,6 @@
 .link-active {
   font-weight: bold;
   color: var(--color-text-primary);
-}
-
-.link:hover {
-  font-weight: bold;
 }
 
 @media all and (max-width: 576px) {

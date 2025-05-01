@@ -15,7 +15,7 @@ import {
     OutlinedInput,
 } from '@mui/material';
 
-import logo from '../../assets/yeonguk-logo.png';
+import logo from '../../assets/ddalkkak.png';
 import './LoginPage.style.css';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
