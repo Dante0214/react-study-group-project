@@ -30,7 +30,7 @@ const Header = () => {
 
   return (
     <header className={styles['header']}>
-      <Link to={'/main'}>
+      <Link to={'/'}>
         <img src={logo} alt='logo' className={styles['logo']} />
       </Link>
       {isMobile ? (
