@@ -14,6 +14,8 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
+
+import logo from "../../assets/yeonguk-logo.png";
 import "./LoginPage.style.css";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -79,9 +81,12 @@ const LoginPage = () => {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5">
-          로그인
-        </Typography>
+        <figure>
+          <img src={logo} alt="딸깍영어 로고" style={{ maxWidth: "250px" }} />
+        </figure>
+        {/* <Typography component="h1" variant="h5">
+                    로그인
+                </Typography> */}
         <Box
           className="loginFormBox"
           component="form"
@@ -154,7 +159,7 @@ const LoginPage = () => {
           >
             로그인
           </Button>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} sx={{ justifyContent: "center" }}>
             <Grid item xs>
               <Link
                 href="#"
@@ -167,7 +172,10 @@ const LoginPage = () => {
                 비밀번호 찾기
               </Link>
             </Grid>
-            <Grid item>
+            <Grid item xs>
+              |
+            </Grid>
+            <Grid item xs>
               <Link
                 href="#"
                 variant="body2"

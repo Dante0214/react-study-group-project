@@ -22,7 +22,7 @@ const LandingTextBox = ({ type }) => {
   return (
     <Box
       sx={{
-        bgcolor: "rgba(247,248,252,0.50)",
+        bgcolor: "rgba(247,248,252,0.80)",
         borderRadius: 2,
         p: 2,
         height: "100%",
