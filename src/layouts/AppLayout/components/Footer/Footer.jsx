@@ -9,7 +9,7 @@ const Footer = () => {
   const { pathname } = useLocation();
 
   return (
-    <footer className={styles['footer']} style={{ marginTop: `${isMobile && pathname === '/' ? '330px' : '40px'}` }}>
+    <footer className={styles['footer']} style={{ marginTop: `${isMobile && pathname === '/' ? '570px' : '40px'}` }}>
       <div className={styles['about']}>
         <h3>습관이 되는 영어</h3>
         <p className={styles['about-content']}>매일 흥미로운 영어 뉴스로 자연스럽게 키워지는 실력</p>
