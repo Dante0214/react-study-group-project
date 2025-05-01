@@ -35,14 +35,13 @@ const WordCard = ({ word, isSaved, onSave, onPlaySound, setHoveredWord }) => {
             <Typography 
               variant="h6" 
               className="word-text"
-              onClick={() => onPlaySound(word.word)}
             >
               {word.name}
               <span 
                 className="sound-emoji"
                 onClick={(e) => {
                   e.stopPropagation();
-                  onPlaySound(word.word);
+                  onPlaySound(word.name);
                 }}
               >
                 🔊
@@ -51,7 +50,7 @@ const WordCard = ({ word, isSaved, onSave, onPlaySound, setHoveredWord }) => {
           </Box>
           <Checkbox
             checked={isSaved}
-            onChange={() => onSave(word.name)}
+            onChange={() => onSave(word)}
             className="word-checkbox"
             sx={{
               '&.Mui-checked': {

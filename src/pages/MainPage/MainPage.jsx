@@ -84,12 +84,6 @@ const MainPage = () => {
     }
   }, [webSearchData, shouldLoadNews]);
 
-  // 초기 한 번만 기사 로드
-  useEffect(() => {
-    loadNews(topic);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   // JSON 파싱 및 오류 처리
   const [newsObject, setNewsObject] = useState({
     title: "",

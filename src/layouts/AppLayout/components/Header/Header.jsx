@@ -7,11 +7,14 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import useAuthStore from '../../../../stores/authStore';
+import { useIsMobile } from '../../../../hooks/useIsMobile';
 
-const Header = ({ isMobile }) => {
+const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const { pathname } = useLocation();
+
+  const isMobile = useIsMobile();
 
   const { isLoggedIn, setLogout } = useAuthStore();
 
@@ -27,7 +30,7 @@ const Header = ({ isMobile }) => {
 
   return (
     <header className={styles['header']}>
-      <Link to={'/main'}>
+      <Link to={'/'}>
         <img src={logo} alt='logo' className={styles['logo']} />
       </Link>
       {isMobile ? (

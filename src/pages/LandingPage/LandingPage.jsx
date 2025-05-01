@@ -52,16 +52,19 @@ const LandingPage = () => {
         maxWidth="md"
         disableGutters
         sx={{
-          height: "90dvh",
+          height: "100%",
+          minHeight: "100dvh",
           display: "flex",
           flexDirection: "column",
+          alignSelf: "center",
           borderRadius: 4,
           boxShadow: 3,
           p: 0,
+          marginTop: 4,
           position: "relative",
         }}
       >
-        <Box sx={{ width: "100%", position: "absolute", top: 0, left: 25 }}>
+        <Box sx={{ position: "absolute", top: 0, left: 25 }}>
           <Button
             variant="contained"
             onClick={handleStartClick}
@@ -124,6 +127,7 @@ const LandingPage = () => {
         <Box
           sx={{
             flex: "4 1 0%",
+            width: "100%",
             bgcolor: "var(--color-primary)",
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
@@ -196,27 +200,27 @@ const LandingPage = () => {
             </Typography>
           </Box>
         </Box>
+        {/* 미리보기 모달 */}
+        <Dialog
+          open={Boolean(openImage)}
+          onClose={() => setOpenImage(null)}
+          maxWidth="md"
+        >
+          <DialogContent sx={{ p: 0 }}>
+            <Box
+              component="img"
+              src={openImage}
+              alt="미리보기 이미지"
+              sx={{
+                width: "100%",
+                height: "auto",
+                maxHeight: "80vh",
+                objectFit: "contain",
+              }}
+            />
+          </DialogContent>
+        </Dialog>
       </Container>
-      {/* 미리보기 모달 */}
-      <Dialog
-        open={Boolean(openImage)}
-        onClose={() => setOpenImage(null)}
-        maxWidth="md"
-      >
-        <DialogContent sx={{ p: 0 }}>
-          <Box
-            component="img"
-            src={openImage}
-            alt="미리보기 이미지"
-            sx={{
-              width: "100%",
-              height: "auto",
-              maxHeight: "80vh",
-              objectFit: "contain",
-            }}
-          />
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };

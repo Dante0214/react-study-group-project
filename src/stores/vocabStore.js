@@ -1,21 +1,51 @@
-import { create } from "zustand";
 
-export const useVocabStore = create((set) => ({
-  vocabList: [], // 단어 리스트 저장
-  checkedVocab: [], // 체크한 단어만 저장
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-  setVocabList: (newList) => set({ vocabList: newList }),
 
-  //word의 중복 가능성이 있으므로 id 값으로 비교
-  toggleChecked: (id) =>
-    set((state) => {
-      const isChecked = state.checkedVocab.includes(id);
-      return {
-        checkedVocab: isChecked
-          ? state.checkedVocab.filter((item) => item !== id)
-          : [...state.checkedVocab, id],
-      };
+
+//myVocabList 안에 단어 예시
+// {
+//   name: "apple",
+//   meaning: "사과",
+//   class: "명사",
+//   example: "I like apple.",
+// }
+
+export const useVocabStore = create(
+  persist(
+    (set, get) => ({
+      myVocabList: [],
+
+      // ✅ (name + meaning) 기준 중복 제거하여 병합 저장
+      setMyVocabList: (newList) => {
+        const currentList = get().myVocabList;
+
+        const merged = [...currentList, ...newList];
+
+        const uniqueByNameMeaning = merged.filter(
+          (word, index, self) =>
+            index === self.findIndex(
+              (w) => w.name === word.name && w.meaning === word.meaning
+            )
+        );
+
+        set({ myVocabList: uniqueByNameMeaning });
+      },
+
+      // ✅ (name + meaning) 기준 정확히 삭제
+      deleteMyVocab: (name, meaning) =>
+        set((state) => ({
+          myVocabList: state.myVocabList.filter(
+            (item) => !(item.name === name && item.meaning === meaning)
+          ),
+        })),
+
+      // ✅ 전체 초기화
+      clearMyVocabList: () => set({ myVocabList: [] }),
     }),
-
-  clearChecked: () => set({ checkedVocab: [] }), // 체크한 단어 초기화
-}));
+    {
+      name: "my-vocab-storage", // localStorage key
+    }
+  )
+);

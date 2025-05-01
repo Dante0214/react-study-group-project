@@ -16,7 +16,7 @@ const VocaCard = ({ item, onDelete }) => {
           }}
         >
           <Typography variant="h6" color="var(--color-text-primary)">
-            {item.word}
+            {item.name}
           </Typography>
           <Button
             variant="text"
@@ -27,11 +27,14 @@ const VocaCard = ({ item, onDelete }) => {
                 backgroundColor: "transparent",
               },
             }}
-            onClick={() => onDelete(item.id)}
+            onClick={() => onDelete(item)}
           >
             삭제
           </Button>
         </Box>
+        <Typography color="var(--color-text-primary)" gutterBottom>
+          {item.class}
+        </Typography>
         <Typography color="var(--color-text-disabled)">
           {item.meaning}
         </Typography>

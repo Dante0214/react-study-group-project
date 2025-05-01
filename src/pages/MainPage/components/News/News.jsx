@@ -39,7 +39,10 @@ const News = ({
       return parts.map((part, index) => {
         if (part.toLowerCase() === wordToHighlight.toLowerCase()) {
           return (
-            <span key={index} className="highlighted-word">
+            <span
+              key={index}
+              className="highlighted-word"
+            >
               {part}
             </span>
           );
@@ -78,7 +81,9 @@ const News = ({
             label="Topic"
             variant="outlined"
           >
-            <MenuItem value="Any">Any</MenuItem>
+            <MenuItem value="Any">
+              <em>Any</em>
+            </MenuItem>
             <MenuItem value="IT">IT</MenuItem>
             <MenuItem value="Politics">Politics</MenuItem>
             <MenuItem value="Economy">Economy</MenuItem>
@@ -122,10 +127,15 @@ const News = ({
             </div>
           </div>
         ) : (
-          <Box className="news-empty-container">
-            <Typography variant="body1" className="news-empty-text">
-              기사를 불러올 수 없습니다. 다시 시도해 주세요.
+          <Box className="news-welcome-container">
+            <Typography variant="h6" className="news-welcome-title">
+              영어 기사 학습을 시작해보세요! 👋
             </Typography>
+            <Typography variant="body1" className="news-welcome-text">
+              아래 버튼을 클릭하여 최신 영어 기사를 불러올 수 있습니다.
+              원하는 주제를 선택하여 관심 있는 분야의 기사를 학습해보세요.
+            </Typography>
+            <div className="news-welcome-icon">📰</div>
           </Box>
         )}
       </Box>
