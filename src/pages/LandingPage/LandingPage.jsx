@@ -44,7 +44,7 @@ const LandingPage = () => {
   // const isMobile = useMediaQuery("(max-width:425px)");
 
   const handleStartClick = () => {
-    console.log("어디로..");
+    navigate("/login");
   };
 
   return (
