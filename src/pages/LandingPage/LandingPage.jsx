@@ -239,7 +239,7 @@ const LandingPage = () => {
             px: 4,
             py: 3,
             position: "relative",
-            zIndex: "1005",
+            zIndex: "10",
             bgcolor: "#fff",
           }}
         >
