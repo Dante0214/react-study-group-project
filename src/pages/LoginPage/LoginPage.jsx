@@ -12,9 +12,10 @@ import {
     FormControl,
     InputLabel,
     OutlinedInput,
+    Typography,
 } from '@mui/material';
 
-import logo from '../../assets/ddalkkak.png';
+// import logo from '../../assets/ddalkkak.png';
 import './LoginPage.style.css';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -84,17 +85,18 @@ const LoginPage = () => {
         >
             <Box
                 sx={{
+                    marginTop: 4,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                 }}
             >
-                <figure>
+                {/* <figure>
                     <img src={logo} alt="딸깍영어 로고" style={{ maxWidth: '250px' }} />
-                </figure>
-                {/* <Typography component="h1" variant="h5">
+                </figure> */}
+                <Typography component="h1" variant="h5">
                     로그인
-                </Typography> */}
+                </Typography>
                 <Box className="loginFormBox" component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
                     <FormControl fullWidth required margin="normal" variant="outlined" color="warning">
                         <InputLabel htmlFor="email">이메일 주소</InputLabel>
