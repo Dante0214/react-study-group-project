@@ -1,72 +1,107 @@
 .footer {
   background: var(--color-background-alt);
+  margin-top: 60px;
+  padding: 30px;
   color: var(--color-text-primary);
-  padding: 30px 30px 40px;
-  margin-top: 40px;
+}
+
+.footer-container {
+  width: 1400px;
+  padding-bottom: 22px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid var(--color-text-disabled);
 }
 
-.about-content {
+.logo-image {
+  width: 80px;
+}
+
+.introduction-text {
   margin: 0;
+  padding: 8px 0;
 }
 
-.about-content:last-child {
-  margin-top: 5px;
-}
-
-.features-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.github-icon {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 18.72px 0;
-}
-
-.github-icon-text {
-  font-size: 18.72px;
-  font-weight: 600;
-}
-
-.github-link-list {
+.navigation {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
 }
 
-.github-link-item {
-  color: var(--color-text-primary);
+.navigation-link {
+  display: block;
   text-decoration: none;
-  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 5px;
+  color: var(--color-text-disabled);
+}
+
+.navigation-link-active {
+  color: var(--color-text-primary);
+}
+
+.terms-text {
+  padding: 8px 16px;
 }
 
 .github-link {
   color: var(--color-text-disabled);
-  text-decoration: none;
 }
 
 .github-link:hover {
   color: var(--color-text-primary);
 }
 
+.copyright {
+  width: 1400px;
+  margin: 5px auto 0;
+  color: var(--color-text-disabled);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
 @media all and (max-width: 576px) {
   .footer {
-    flex-direction: column;
-    gap: 20px;
-    font-size: 12px;
+    padding: 20px;
   }
 
-  .github-icon-text {
-    font-size: 14.04px;
+  .footer-container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 12px;
+  }
+
+  .logo-image {
+    width: 100px;
+  }
+
+  .navigation {
+    display: flex;
+    gap: 16px;
+    margin: 16px 0 6px;
+  }
+
+  .navigation-link {
+    padding: 0;
+  }
+
+  .terms {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .terms-text {
+    padding: 0;
+  }
+
+  .copyright {
+    width: 100%;
+    justify-content: center;
   }
 }
