@@ -276,8 +276,8 @@ const LandingPage = () => {
                 onClick={() => setOpenImage(mainPageImg)}
                 sx={{
                   cursor: "pointer",
-                  width: { xs: "100%", sm: 300 },
-                  height: 200,
+                  width: { xs: "100%", sm: 400 },
+                  height: { xs: 200, sm: 250 },
                   borderRadius: 3,
                   boxShadow: 3,
                   mb: 1,
@@ -307,8 +307,8 @@ const LandingPage = () => {
                 onClick={() => setOpenImage(vocaPageImg)}
                 sx={{
                   cursor: "pointer",
-                  width: { xs: "100%", sm: 300 },
-                  height: 200,
+                  width: { xs: "100%", sm: 400 },
+                  height: { xs: 200, sm: 250 },
                   borderRadius: 3,
                   boxShadow: 3,
                   mb: 1,
@@ -334,7 +334,7 @@ const LandingPage = () => {
         <Dialog
           open={Boolean(openImage)}
           onClose={() => setOpenImage(null)}
-          maxWidth="md"
+          maxWidth="lg"
         >
           <DialogContent sx={{ p: 0 }}>
             <Box
