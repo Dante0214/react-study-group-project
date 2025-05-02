@@ -61,35 +61,6 @@ const LandingPage = () => {
           position: "relative",
         }}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            right: 25,
-            display: { xs: "none", sm: "block" },
-          }}
-        >
-          <Button
-            variant="contained"
-            onClick={handleStartClick}
-            sx={{
-              borderTopLeftRadius: 0,
-              borderTopRightRadius: 0,
-              bgcolor: "#fff",
-              color: "var(--color-primary)",
-              fontWeight: "bold",
-              zIndex: 10,
-              transition: "all 0.3s ease-in-out",
-              "&:hover": {
-                transform: "scale(1.05)",
-                boxShadow: 6,
-              },
-            }}
-          >
-            Get started
-          </Button>
-        </Box>
-
         <LandingBanner />
         <Box
           sx={{
@@ -212,6 +183,34 @@ const LandingPage = () => {
             bgcolor: "#fff",
           }}
         >
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              right: 25,
+              display: { xs: "none", sm: "block" },
+            }}
+          >
+            <Button
+              variant="contained"
+              onClick={handleStartClick}
+              sx={{
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+                bgcolor: "var(--color-primary)",
+                color: "#fff",
+                fontWeight: "bold",
+                zIndex: 10,
+                transition: "all 0.3s ease-in-out",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: 6,
+                },
+              }}
+            >
+              Get started
+            </Button>
+          </Box>
           {/*버전1 카드 데이터 */}
           <Box sx={{ marginTop: { xs: 0, md: 2 } }}>
             <Grid
