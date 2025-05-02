@@ -117,7 +117,7 @@ const LandingPage = () => {
           >
             <img src={`${logo}`} alt="파비콘로고" srcset="" width={80} />
             <Typography variant="body1" color="#fff" fontWeight="bold">
-              AI와 함께 매일 관심 있는 영어 뉴스를 통해 자연스럽게 공부하는 루틴
+              AI와 함께 관심 있는 영어 뉴스를 통해 자연스럽게 공부하는 루틴
             </Typography>
           </Grid>
         </Box>
