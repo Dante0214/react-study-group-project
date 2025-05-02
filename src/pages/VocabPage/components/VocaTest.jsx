@@ -137,7 +137,6 @@ const VocabTest = ({ onExit }) => {
           점수: {score} / {quizList.length}
         </Typography>
 
-        {/* 상단 버튼 2개: 다시 시작 + 모드 전환 */}
         <Stack
           spacing={2}
           direction={{ xs: "column", sm: "row" }}
@@ -152,7 +151,6 @@ const VocabTest = ({ onExit }) => {
           </Button>
         </Stack>
 
-        {/* 하단 종료 버튼 */}
         <Stack justifyContent="center" direction="row">
           <Button variant="text" color="error" onClick={onExit}>
             종료
@@ -229,12 +227,22 @@ const VocabTest = ({ onExit }) => {
       <Typography variant="h5" gutterBottom>
         단어시험 시작하기
       </Typography>
-      <Stack spacing={2} direction="row" justifyContent="center" mt={2}>
+      <Stack
+        spacing={2}
+        direction={{ xs: "column", sm: "row" }}
+        justifyContent="center"
+        mt={2}
+      >
         <Button variant="contained" onClick={startTest}>
           시험 시작
         </Button>
         <Button variant="outlined" onClick={toggleMode}>
           모드 전환 ({mode === "wordToMeaning" ? "뜻 맞추기" : "단어 맞추기"})
+        </Button>
+      </Stack>
+      <Stack justifyContent="center" direction="row">
+        <Button variant="text" color="error" onClick={onExit}>
+          종료
         </Button>
       </Stack>
     </Box>
