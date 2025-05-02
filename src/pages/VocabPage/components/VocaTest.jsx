@@ -321,7 +321,7 @@ const VocabTest = ({ onExit }) => {
               variant="contained"
               sx={{
                 backgroundColor: "black",
-                marginLeft: "auto",
+                whiteSpace: "nowrap",
               }}
               onClick={toggleMode}
               fullWidth
