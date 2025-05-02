@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Box,
   Typography,
@@ -10,6 +10,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import "./News.style.css";
+import { useNewsStore } from "../../../../stores/newsStore";
 
 const News = ({
   newsObject,
@@ -19,6 +20,23 @@ const News = ({
   hoveredWord,
   loadNews,
 }) => {
+  // 마지막 불러온 시간 정보 가져오기
+  const { lastFetchedTime } = useNewsStore();
+  
+  // 마지막 불러온 시간을 포맷팅
+  const formattedLastFetchedTime = useMemo(() => {
+    if (!lastFetchedTime) return null;
+    
+    const fetchedDate = new Date(lastFetchedTime);
+    return new Intl.DateTimeFormat('ko-KR', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    }).format(fetchedDate);
+  }, [lastFetchedTime]);
+
   // 데이터가 제대로 있는지 확인
   const hasNewsData = newsObject && newsObject.title && newsObject.content;
 
@@ -124,6 +142,12 @@ const News = ({
                   링크
                 </a>
               </span>
+              
+              {formattedLastFetchedTime && (
+                <div className="news-fetched-time">
+                  마지막 업데이트: {formattedLastFetchedTime}
+                </div>
+              )}
             </div>
           </div>
         ) : (
