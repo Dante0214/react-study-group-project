@@ -26,7 +26,7 @@ const ScrollToTopButton = () => {
         sx={{
           position: "fixed",
           bottom: 40,
-          right: 8,
+          right: { xs: 10, md: 30 },
           zIndex: 1300,
         }}
         aria-label="Scroll back to top"

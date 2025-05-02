@@ -1,7 +1,6 @@
 import React from "react";
 import "./LandingPage.style.css";
 import { Box, Button, Typography, Grid, Container } from "@mui/material";
-// import bannerImg from "./images/landing-page-book.png";
 import mainPageImg from "./images/main-page-img.png";
 import vocaPageImg from "./images/voca-page-img.png";
 import { useNavigate } from "react-router-dom";
@@ -11,9 +10,9 @@ import StarIcon from "@mui/icons-material/Star";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Dialog, DialogContent } from "@mui/material";
 import ScrollToTopButton from "../../common/components/Buttons/ScrollToTopButton";
-import logo from "../../../public/ddalkkak.ico";
 import logoWhite from "./images/logo-white.png";
 import iphoneMain from "./images/white-iphone.png";
+import LandingBanner from "./components/LandingBanner";
 
 const cardData = [
   {
@@ -21,14 +20,12 @@ const cardData = [
     description:
       "매일 관심있는 영어 뉴스를 통해 습관처럼 공부하는 루틴을 만드세요.",
     color: "var(--color-text-primary)",
-    // color: "var(--color-primary-light)",
     icon: <InfoIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
   {
     title: "AI 단어 정리",
     description: "AI가 기사 속 단어들을 자동으로 추출해 리스트로 정리해줘요.",
     color: "var(--color-text-secondary)",
-    // color: "var(--color-primary)",
     icon: <StarIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
   {
@@ -36,7 +33,6 @@ const cardData = [
     description:
       "내가 저장한 단어와 예문을 한눈에! 언제 어디서든 복습할 수 있어요.",
     color: "var(--color-text-disabled)",
-    // color: "var(--color-primary-dark)",
     icon: <CheckCircleIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
 ];
@@ -44,14 +40,13 @@ const cardData = [
 const LandingPage = () => {
   const [openImage, setOpenImage] = React.useState(null);
   const navigate = useNavigate();
-  // const isMobile = useMediaQuery("(max-width:425px)");
 
   const handleStartClick = () => {
     navigate("/login");
   };
 
   return (
-    <div className="landing-body">
+    <div>
       <ScrollToTopButton />
       <Container
         maxWidth="full"
@@ -62,72 +57,16 @@ const LandingPage = () => {
           display: "flex",
           flexDirection: "column",
           alignSelf: "center",
-          // borderRadius: 4,
-          // boxShadow: 3,
           p: 0,
-          // marginTop: 2,
           position: "relative",
         }}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            right: 25,
-            display: { xs: "none", sm: "block" },
-          }}
-        >
-          <Button
-            variant="contained"
-            onClick={handleStartClick}
-            sx={{
-              borderTopLeftRadius: 0,
-              borderTopRightRadius: 0,
-              bgcolor: "#fff",
-              color: "var(--color-primary)",
-              // bgcolor: "var(--color-primary)",
-              // color: "var(--color-text-primary)",
-              fontWeight: "bold",
-              zIndex: 10,
-              transition: "all 0.3s ease-in-out",
-              "&:hover": {
-                transform: "scale(1.05)",
-                boxShadow: 6,
-              },
-            }}
-          >
-            Get started
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            width: "100%",
-            height: "80px",
-            bgcolor: "var(--color-text-primary)",
-            textAlign: "center",
-          }}
-        >
-          <Grid
-            container
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img src={`${logo}`} alt="파비콘로고" srcset="" width={80} />
-            <Typography variant="body1" color="#fff" fontWeight="bold">
-              AI와 함께 관심 있는 영어 뉴스를 통해 자연스럽게 공부하는 루틴
-            </Typography>
-          </Grid>
-        </Box>
-
+        <LandingBanner />
         <Box
           sx={{
             flex: "5 1 0%",
             minHeight: { xs: "380px", md: "500px" },
             backgroundColor: "var(--color-primary)",
-            // backgroundImage: `url(${bannerImg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -136,8 +75,6 @@ const LandingPage = () => {
             justifyContent: "center",
             alignItems: "center",
             p: 4,
-            // borderTopLeftRadius: 16,
-            // borderTopRightRadius: 16,
           }}
         >
           {/* 버전 2 배너 영역 */}
@@ -189,7 +126,11 @@ const LandingPage = () => {
                     color="#Fff"
                     fontWeight="bolder"
                     fontSize="2.5em"
-                    marginLeft="5px"
+                    marginLeft="25px"
+                    sx={{
+                      transform: "scaleX(1.2)",
+                      display: "inline-block",
+                    }}
                   >
                     딸깍영어
                   </Typography>
@@ -228,7 +169,6 @@ const LandingPage = () => {
           sx={{
             flex: "5 1 0%",
             width: "100%",
-            // bgcolor: "var(--color-primary)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -243,6 +183,34 @@ const LandingPage = () => {
             bgcolor: "#fff",
           }}
         >
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              right: 25,
+              display: { xs: "none", sm: "block" },
+            }}
+          >
+            <Button
+              variant="contained"
+              onClick={handleStartClick}
+              sx={{
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+                bgcolor: "var(--color-primary)",
+                color: "#fff",
+                fontWeight: "bold",
+                zIndex: 10,
+                transition: "all 0.3s ease-in-out",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: 6,
+                },
+              }}
+            >
+              Get started
+            </Button>
+          </Box>
           {/*버전1 카드 데이터 */}
           <Box sx={{ marginTop: { xs: 0, md: 2 } }}>
             <Grid
@@ -276,8 +244,8 @@ const LandingPage = () => {
                 onClick={() => setOpenImage(mainPageImg)}
                 sx={{
                   cursor: "pointer",
-                  width: { xs: "100%", sm: 300 },
-                  height: 200,
+                  width: { xs: "100%", sm: 400 },
+                  height: { xs: 200, sm: 250 },
                   borderRadius: 3,
                   boxShadow: 3,
                   mb: 1,
@@ -307,8 +275,8 @@ const LandingPage = () => {
                 onClick={() => setOpenImage(vocaPageImg)}
                 sx={{
                   cursor: "pointer",
-                  width: { xs: "100%", sm: 300 },
-                  height: 200,
+                  width: { xs: "100%", sm: 400 },
+                  height: { xs: 200, sm: 250 },
                   borderRadius: 3,
                   boxShadow: 3,
                   mb: 1,
@@ -334,7 +302,7 @@ const LandingPage = () => {
         <Dialog
           open={Boolean(openImage)}
           onClose={() => setOpenImage(null)}
-          maxWidth="md"
+          maxWidth="lg"
         >
           <DialogContent sx={{ p: 0 }}>
             <Box
