@@ -3,9 +3,17 @@ import "./MainPage.style.css";
 import News from "./components/News/News";
 import Words from "./components/Words/Words";
 import { useGetWebSearch } from "../../hooks/useGPT";
+import { useNewsStore } from "../../stores/newsStore";
 
 const MainPage = () => {
-  const [topic, setTopic] = useState("Any");
+  // newsStore에서 상태와 액션 가져오기
+  const { 
+    newsObject: storedNewsObject, 
+    topic, 
+    setTopic, 
+    setNewsObject 
+  } = useNewsStore();
+
   const [hoveredWord, setHoveredWord] = useState(null);
   const [shouldLoadNews, setShouldLoadNews] = useState(false);
   const [newsPrompt, setNewsPrompt] = useState("");
@@ -84,36 +92,25 @@ const MainPage = () => {
     }
   }, [webSearchData, shouldLoadNews]);
 
-  // JSON 파싱 및 오류 처리
-  const [newsObject, setNewsObject] = useState({
-    title: "",
-    content: "",
-    date: "",
-    source: {
-      name: "",
-      url: "",
-    },
-    words: [],
-    idioms: [],
-  });
-
+  // JSON 파싱 및 오류 처리 - 전역 상태에 저장
   useEffect(() => {
     if (webSearchData?.output_text) {
       try {
-        const parsedNews = JSON.parse(webSearchData.output_text);
+        const cleanedText = webSearchData.output_text
+          .replace(/```json/g, '')
+          .replace(/```/g, '')
+          .trim();
+          
+        const parsedNews = JSON.parse(cleanedText);
+        
+        // 전역 상태에 저장
         setNewsObject(parsedNews);
       } catch (error) {
         console.error("JSON 파싱 오류:", error);
+        console.log("파싱 시도한 텍스트:", webSearchData.output_text);
       }
     }
-  }, [webSearchData]);
-
-  // 디버깅을 위한 로그
-  useEffect(() => {
-    if (newsObject.content) {
-      console.log("뉴스 데이터 로드됨:", newsObject);
-    }
-  }, [newsObject.content]);
+  }, [webSearchData, setNewsObject]);
 
   return (
     <div className="main-page-container">
@@ -125,7 +122,7 @@ const MainPage = () => {
       <div className="main-page-content">
         <div className="main-page-item">
           <News
-            newsObject={newsObject}
+            newsObject={storedNewsObject}
             topic={topic}
             setTopic={setTopic}
             isLoading={webSearchLoading}
@@ -135,7 +132,7 @@ const MainPage = () => {
         </div>
         <div className="main-page-item">
           <Words 
-            newsObject={newsObject} 
+            newsObject={storedNewsObject} 
             isLoading={webSearchLoading}
             setHoveredWord={setHoveredWord}
           />
@@ -146,3 +143,4 @@ const MainPage = () => {
 };
 
 export default MainPage;
+
