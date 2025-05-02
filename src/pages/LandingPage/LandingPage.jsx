@@ -46,7 +46,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="landing-body">
+    <div>
       <ScrollToTopButton />
       <Container
         maxWidth="full"
