@@ -168,83 +168,181 @@ const VocabTest = ({ onExit }) => {
       mode === "wordToMeaning" ? current.meaning : current.name;
 
     return (
-      <Paper sx={{ p: 4, mt: 4 }}>
-        <Typography variant="h6">
-          문제 {currentIndex + 1} / {quizList.length}
-        </Typography>
-        <LinearProgress
-          variant="determinate"
-          value={(timeLeft / TIME_LIMIT) * 100}
-          sx={{ height: 10, borderRadius: 5, my: 2 }}
-        />
-        <Typography variant="h5" gutterBottom>
-          {question}
-        </Typography>
-        <TextField
-          inputRef={inputRef}
-          fullWidth
-          label="정답 입력"
-          value={userAnswer}
-          onChange={(e) => setUserAnswer(e.target.value)}
-          disabled={showAnswer}
-          autoFocus
-        />
-        <Typography mt={2} color="text.secondary">
-          남은 시간: {timeLeft}초
-        </Typography>
-
-        {showAnswer ? (
-          <Box mt={3}>
-            <Typography color="primary">
-              정답: <strong>{correctAnswer}</strong>
-            </Typography>
-            <Button
-              variant="contained"
-              fullWidth
-              sx={{ mt: 2 }}
-              onClick={handleNext}
-            >
-              다음 문제
-            </Button>
-          </Box>
-        ) : (
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{ mt: 2 }}
-            onClick={handleCheckAnswer}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          p: 2,
+        }}
+      >
+        <Paper
+          elevation={4}
+          sx={{
+            p: 4,
+            mt: 4,
+            maxWidth: 400, // 작게
+            width: "100%", // 반응형
+            mx: "auto", // 중앙 정렬
+            borderRadius: 4, // 둥글게
+            boxShadow: 3, // 그림자
+            backgroundColor: "background.paper", // 카드 배경색
+          }}
+        >
+          <Box
+            sx={{
+              py: 1.5,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              borderBottom: "1px solid #f0f0f0",
+            }}
           >
-            확인
-          </Button>
-        )}
-      </Paper>
+            <Typography sx={{ fontWeight: "bold" }}>단어 시험</Typography>
+            <Typography variant="body2" color="text.secondary">
+              {currentIndex + 1}/{quizList.length}
+            </Typography>
+          </Box>
+          <LinearProgress
+            variant="determinate"
+            value={(timeLeft / TIME_LIMIT) * 100}
+            sx={{ height: 10, borderRadius: 5, my: 2 }}
+          />
+
+          <Box sx={{ p: 3, bgcolor: "#f9f9f9" }}>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ mr: 0.5 }}
+              >
+                영어 단어
+              </Typography>
+            </Box>
+
+            <Typography variant="h4" sx={{ fontWeight: "bold", mb: 3 }}>
+              {question}
+            </Typography>
+
+            <TextField
+              inputRef={inputRef}
+              fullWidth
+              label="정답 입력"
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+              disabled={showAnswer}
+              autoFocus
+            />
+
+            <Typography mt={2} color="text.secondary">
+              남은 시간: {timeLeft}초
+            </Typography>
+
+            <Box mt={3} display="flex" flexDirection="column">
+              {showAnswer && (
+                <Typography>
+                  정답: <strong>{correctAnswer}</strong>
+                </Typography>
+              )}
+              <Box display="flex" justifyContent="space-between" mt={2}>
+                <Button
+                  sx={{ backgroundColor: "lightgrey", color: "black" }}
+                  onClick={onExit}
+                >
+                  종료
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "black",
+                    marginLeft: "auto",
+                  }}
+                  onClick={showAnswer ? handleNext : handleCheckAnswer}
+                >
+                  {showAnswer ? "다음 문제" : "확인"}
+                </Button>
+              </Box>
+            </Box>
+          </Box>
+        </Paper>
+      </Box>
     );
   }
 
   // 시작 화면
   return (
-    <Box textAlign="center" mt={4}>
-      <Typography variant="h5" gutterBottom>
-        단어시험 시작하기
-      </Typography>
-      <Stack
-        spacing={2}
-        direction={{ xs: "column", sm: "row" }}
-        justifyContent="center"
-        mt={2}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        p: 2,
+      }}
+    >
+      <Paper
+        elevation={4}
+        sx={{
+          p: 4,
+          mt: 4,
+          maxWidth: 400,
+          width: "100%",
+          mx: "auto",
+          borderRadius: 4,
+          boxShadow: 3,
+          backgroundColor: "background.paper",
+        }}
       >
-        <Button variant="contained" onClick={startTest}>
-          시험 시작
-        </Button>
-        <Button variant="outlined" onClick={toggleMode}>
-          모드 전환 ({mode === "wordToMeaning" ? "뜻 맞추기" : "단어 맞추기"})
-        </Button>
-      </Stack>
-      <Stack justifyContent="center" direction="row">
-        <Button variant="text" color="error" onClick={onExit}>
-          종료
-        </Button>
-      </Stack>
+        <Box
+          sx={{
+            py: 1.5,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography sx={{ fontWeight: "bold", mb: 2 }}>단어 시험</Typography>
+
+          <Stack
+            spacing={1.5}
+            sx={{ width: "100%" }}
+            direction={{ xs: "column", sm: "row" }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "black",
+              }}
+              onClick={startTest}
+              fullWidth
+            >
+              시험 시작
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "black",
+                whiteSpace: "nowrap",
+              }}
+              onClick={toggleMode}
+              fullWidth
+            >
+              모드 전환 (
+              {mode === "wordToMeaning" ? "뜻 맞추기" : "단어 맞추기"})
+            </Button>
+          </Stack>
+          <Box>
+            <Button
+              sx={{ marginTop: 3 }}
+              variant="text"
+              color="error"
+              onClick={onExit}
+              fullWidth
+            >
+              돌아가기
+            </Button>
+          </Box>
+        </Box>
+      </Paper>
     </Box>
   );
 };
