@@ -11,9 +11,9 @@ import StarIcon from "@mui/icons-material/Star";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Dialog, DialogContent } from "@mui/material";
 import ScrollToTopButton from "../../common/components/Buttons/ScrollToTopButton";
-import logo from "../../../public/ddalkkak.ico";
 import logoWhite from "./images/logo-white.png";
 import iphoneMain from "./images/white-iphone.png";
+import LandingBanner from "./components/LandingBanner";
 
 const cardData = [
   {
@@ -99,29 +99,8 @@ const LandingPage = () => {
             Get started
           </Button>
         </Box>
-        <Box
-          sx={{
-            width: "100%",
-            height: "80px",
-            bgcolor: "var(--color-text-primary)",
-            textAlign: "center",
-          }}
-        >
-          <Grid
-            container
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img src={`${logo}`} alt="파비콘로고" srcset="" width={80} />
-            <Typography variant="body1" color="#fff" fontWeight="bold">
-              AI와 함께 관심 있는 영어 뉴스를 통해 자연스럽게 공부하는 루틴
-            </Typography>
-          </Grid>
-        </Box>
 
+        <LandingBanner />
         <Box
           sx={{
             flex: "5 1 0%",
