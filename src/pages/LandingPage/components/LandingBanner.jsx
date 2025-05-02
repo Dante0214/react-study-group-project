@@ -14,6 +14,17 @@ const slideUp = keyframes`
   100% { transform: translateY(-50%); }  // 총 높이의 절반만큼 위로 이동
 `;
 
+const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-8px) scale(1.1);
+  }
+  60% {
+    transform: translateY(2px) scale(0.98);
+  }
+`;
 const LandingBanner = () => {
   return (
     <Box
@@ -28,7 +39,18 @@ const LandingBanner = () => {
       }}
     >
       <Grid container alignItems="center" justifyContent="center">
-        <img src={logo} alt="로고" width={80} style={{ marginRight: 12 }} />
+        {/* 통통 튀는 로고 */}
+        <Box
+          component="img"
+          src={logo}
+          alt="로고"
+          width={80}
+          sx={{
+            marginRight: 2,
+            animation: `${bounce} 2s ease-in-out infinite`,
+          }}
+        />
+        {/* 슬라이드업 메시지 박스 */}
         <Box
           sx={{
             height: "30px",
@@ -51,7 +73,7 @@ const LandingBanner = () => {
                 color="#fff"
                 fontWeight="bold"
                 height="24px"
-                marginY="5px"
+                marginY="10px"
               >
                 {msg}
               </Typography>
