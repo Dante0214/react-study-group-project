@@ -155,7 +155,11 @@ const LandingPage = () => {
                     color="#Fff"
                     fontWeight="bolder"
                     fontSize="2.5em"
-                    marginLeft="5px"
+                    marginLeft="25px"
+                    sx={{
+                      transform: "scaleX(1.2)",
+                      display: "inline-block",
+                    }}
                   >
                     딸깍영어
                   </Typography>
