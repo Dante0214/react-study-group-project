@@ -1,7 +1,6 @@
 import React from "react";
 import "./LandingPage.style.css";
 import { Box, Button, Typography, Grid, Container } from "@mui/material";
-// import bannerImg from "./images/landing-page-book.png";
 import mainPageImg from "./images/main-page-img.png";
 import vocaPageImg from "./images/voca-page-img.png";
 import { useNavigate } from "react-router-dom";
@@ -21,14 +20,12 @@ const cardData = [
     description:
       "매일 관심있는 영어 뉴스를 통해 습관처럼 공부하는 루틴을 만드세요.",
     color: "var(--color-text-primary)",
-    // color: "var(--color-primary-light)",
     icon: <InfoIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
   {
     title: "AI 단어 정리",
     description: "AI가 기사 속 단어들을 자동으로 추출해 리스트로 정리해줘요.",
     color: "var(--color-text-secondary)",
-    // color: "var(--color-primary)",
     icon: <StarIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
   {
@@ -36,7 +33,6 @@ const cardData = [
     description:
       "내가 저장한 단어와 예문을 한눈에! 언제 어디서든 복습할 수 있어요.",
     color: "var(--color-text-disabled)",
-    // color: "var(--color-primary-dark)",
     icon: <CheckCircleIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
 ];
@@ -44,7 +40,6 @@ const cardData = [
 const LandingPage = () => {
   const [openImage, setOpenImage] = React.useState(null);
   const navigate = useNavigate();
-  // const isMobile = useMediaQuery("(max-width:425px)");
 
   const handleStartClick = () => {
     navigate("/login");
@@ -62,10 +57,7 @@ const LandingPage = () => {
           display: "flex",
           flexDirection: "column",
           alignSelf: "center",
-          // borderRadius: 4,
-          // boxShadow: 3,
           p: 0,
-          // marginTop: 2,
           position: "relative",
         }}
       >
@@ -85,8 +77,6 @@ const LandingPage = () => {
               borderTopRightRadius: 0,
               bgcolor: "#fff",
               color: "var(--color-primary)",
-              // bgcolor: "var(--color-primary)",
-              // color: "var(--color-text-primary)",
               fontWeight: "bold",
               zIndex: 10,
               transition: "all 0.3s ease-in-out",
@@ -106,7 +96,6 @@ const LandingPage = () => {
             flex: "5 1 0%",
             minHeight: { xs: "380px", md: "500px" },
             backgroundColor: "var(--color-primary)",
-            // backgroundImage: `url(${bannerImg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -115,8 +104,6 @@ const LandingPage = () => {
             justifyContent: "center",
             alignItems: "center",
             p: 4,
-            // borderTopLeftRadius: 16,
-            // borderTopRightRadius: 16,
           }}
         >
           {/* 버전 2 배너 영역 */}
@@ -207,7 +194,6 @@ const LandingPage = () => {
           sx={{
             flex: "5 1 0%",
             width: "100%",
-            // bgcolor: "var(--color-primary)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
