@@ -9,6 +9,8 @@ const LandingCardItem = ({ icon, color, title, description }) => {
         overflow: "visible" /* 아이콘이 튀어나오도록 오버플로우 표시 */,
         textAlign: "center",
         bgcolor: "#fff" /* 카드 배경색: 흰색 (필요에 따라 변경 가능) */,
+        borderRadius: 3,
+        boxShadow: 3,
       }}
     >
       {/* 상단 중앙 아이콘 (스티커) */}

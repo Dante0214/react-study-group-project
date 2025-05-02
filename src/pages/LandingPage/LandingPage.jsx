@@ -91,7 +91,7 @@ const LandingPage = () => {
             flex: "6 1 0%",
             backgroundImage: `url(${bannerImg})`,
             backgroundSize: "cover",
-            backgroundPosition: "top",
+            backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             position: "relative",
             display: "flex",
@@ -128,7 +128,7 @@ const LandingPage = () => {
           sx={{
             flex: "4 1 0%",
             width: "100%",
-            bgcolor: "var(--color-primary)",
+            // bgcolor: "var(--color-primary)",
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "center",
@@ -163,7 +163,7 @@ const LandingPage = () => {
             />
             <Typography
               variant="body2"
-              color="var(--color-text-primary)"
+              color="var(--color-primary)"
               fontWeight="bold"
             >
               뉴스 기반 학습 페이지
@@ -193,7 +193,7 @@ const LandingPage = () => {
             />
             <Typography
               variant="body2"
-              color="var(--color-text-primary)"
+              color="var(--color-primary)"
               fontWeight="bold"
             >
               단어장 기능 미리보기
