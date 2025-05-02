@@ -85,7 +85,7 @@ const LoginPage = () => {
         >
             <Box
                 sx={{
-                    marginTop: 4,
+                    marginTop: 5,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -136,12 +136,17 @@ const LoginPage = () => {
                         />
                     </FormControl>
                     <FormControlLabel control={<Checkbox value="remember" color="warning" />} label="아이디 기억하기" />
-                    <Box sx={{ mt: 3, mb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <Box sx={{ mt: 2, mb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ backgroundColor: `var(--color-primary-light)` }}
+                            sx={{
+                                backgroundColor: `var(--color-primary-light)`,
+                                borderRadius: 2,
+                                minHeight: '56px',
+                                fontSize: '1.1rem',
+                            }}
                         >
                             로그인
                         </Button>
