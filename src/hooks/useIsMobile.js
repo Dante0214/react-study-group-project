@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-export const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+export const useIsMobile = (maxWidth) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < maxWidth);
 
   const handleResize = () => {
-    setIsMobile(window.innerWidth < 576);
+    setIsMobile(window.innerWidth < maxWidth);
   };
 
   useEffect(() => {

@@ -14,7 +14,7 @@ const Footer = () => {
 
   const { pathname } = useLocation();
 
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(851);
 
   const handleClick = () => {
     setOpen(!open);
@@ -92,11 +92,16 @@ const Footer = () => {
           </>
         )}
         <div>
-          <ListItemButton onClick={handleClick} sx={{ width: '325px' }}>
+          <ListItemButton onClick={handleClick} sx={{ width: '255px' }}>
             <ListItemIcon>
-              <GitHubIcon sx={{ fontSize: '32px' }} />
+              <GitHubIcon sx={{ fontSize: '28px' }} />
             </ListItemIcon>
-            <ListItemText primary='Developers' />
+            <ListItemText
+              primary='Developers'
+              primaryTypographyProps={{
+                fontSize: '12px',
+              }}
+            />
             {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </ListItemButton>
           <Collapse in={open} timeout='auto' unmountOnExit>

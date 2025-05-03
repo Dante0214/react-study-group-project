@@ -14,7 +14,7 @@ const Header = () => {
 
   const { pathname } = useLocation();
 
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(576);
 
   const { isLoggedIn, setLogout } = useAuthStore();
 
