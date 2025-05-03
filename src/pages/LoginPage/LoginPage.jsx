@@ -14,8 +14,6 @@ import {
     InputLabel,
     OutlinedInput,
     Typography,
-    Modal,
-    FormHelperText,
 } from '@mui/material';
 
 import './LoginPage.style.css';
@@ -24,7 +22,9 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import useAuthStore from '../../stores/authStore';
 import { Navigate, useNavigate } from 'react-router-dom';
 import GoogleLoginButton from './../../common/components/Buttons/GoogleLoginButton';
-import { signInWithGooglePopup, signInWithEmail, createUser } from '../../util/firebase'; // Firebase 함수 import
+import { signInWithGooglePopup, signInWithEmail, createUser, updateUserProfile } from '../../util/firebase';
+import SignupModal from './components/SignupModal';
+import useSignupStore from '../../stores/signupStore'; // Import the signup store
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -36,12 +36,17 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const { isLoggedIn, setLogin } = useAuthStore();
 
-    const [isNewPasswordValid, setIsNewPasswordValid] = useState(true);
     // 회원가입 모달 상태
     const [openSignupModal, setOpenSignupModal] = useState(false);
-    const [newEmail, setNewEmail] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [isNewEmailValid, setIsNewEmailValid] = useState(false);
+    const {
+        setNewName,
+        setNewEmail,
+        setNewPassword,
+        setIsNewEmailValid,
+        setIsNewPasswordValid,
+        setNewPasswordConfirm,
+    } = useSignupStore();
+
     useEffect(() => {
         const storedEmail = localStorage.getItem('rememberedEmail');
         if (storedEmail) {
@@ -128,46 +133,28 @@ const LoginPage = () => {
 
     // 회원가입 모달 열기
     const handleOpenSignupModal = () => {
+        setNewName('');
+        setNewEmail('');
+        setNewPassword('');
+        setNewPasswordConfirm('');
+        setIsNewEmailValid(true);
+        setIsNewPasswordValid(true);
         setOpenSignupModal(true);
     };
 
     // 회원가입 모달 닫기
     const handleCloseSignupModal = () => {
         setOpenSignupModal(false);
-        setNewEmail('');
-        setNewPassword('');
-    };
-
-    const isValidEmail = (email) => {
-        // 간단한 이메일 형식 검사 정규 표현식
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    };
-    // 새 이메일 상태 업데이트
-    const handleNewEmailChange = (event) => {
-        const newEmailValue = event.target.value;
-        setNewEmail(newEmailValue);
-        setIsNewEmailValid(isValidEmail(newEmailValue)); // 유효성 검사 후 상태 업데이트
-    };
-
-    // 새 비밀번호 상태 업데이트
-    const handleNewPasswordChange = (event) => {
-        const newPasswordValue = event.target.value;
-        setNewPassword(newPasswordValue);
-        setIsNewPasswordValid(newPasswordValue.length >= 6); // 최소 6자 이상인지 확인
     };
 
     // 회원가입 처리
-    const handleSignup = async () => {
-        if (!isNewEmailValid || !isNewPasswordValid || !newEmail || !newPassword) {
-            // 유효성 검사 실패 시 추가 알림 (선택 사항)
-            alert('이메일과 비밀번호를 올바르게 입력해주세요.');
-            return;
-        }
+    const handleSignup = async (name, newEmail, newPassword) => {
         try {
             const result = await createUser(newEmail, newPassword);
             console.log('회원가입 성공:', result.user);
-            alert('회원가입이 완료되었습니다. 로그인해주세요.');
+            await updateUserProfile(result.user, name);
+            console.log('프로필 업데이트 성공:', result.user);
+            alert(`${result?.user.displayName}님 회원가입이 완료되었습니다. 로그인해주세요.`);
             handleCloseSignupModal();
         } catch (error) {
             console.error('회원가입 실패:', error);
@@ -184,7 +171,6 @@ const LoginPage = () => {
                     break;
             }
             alert(errorMessage);
-            // 회원가입 실패 처리 (예: 에러 메시지 표시)
         }
     };
 
@@ -211,7 +197,6 @@ const LoginPage = () => {
                     로그인
                 </Typography>
                 <Box className="loginFormBox" component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
-                    {/* 이메일, 비밀번호 입력 폼 */}
                     <FormControl fullWidth required margin="normal" variant="outlined" color="warning">
                         <InputLabel htmlFor="email">이메일 주소</InputLabel>
                         <OutlinedInput
@@ -296,7 +281,7 @@ const LoginPage = () => {
                             <Link
                                 component="button"
                                 variant="body2"
-                                onClick={handleOpenSignupModal} // 회원가입 모달 열기 함수 연결
+                                onClick={handleOpenSignupModal}
                                 sx={{
                                     color: `var(--color-text-primary)`,
                                     textDecoration: 'none',
@@ -311,77 +296,7 @@ const LoginPage = () => {
             </Box>
 
             {/* 회원가입 모달 */}
-            <Modal
-                open={openSignupModal}
-                onClose={handleCloseSignupModal}
-                aria-labelledby="signup-modal-title"
-                aria-describedby="signup-modal-description"
-            >
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: 400,
-                        bgcolor: 'background.paper',
-                        border: '2px solid #000',
-                        boxShadow: (theme) => theme.shadows[5],
-                        p: 4,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 2,
-                    }}
-                >
-                    <Typography id="signup-modal-title" variant="h6" component="h2">
-                        회원가입
-                    </Typography>
-                    <FormControl fullWidth required variant="outlined" color="warning" error={!isNewEmailValid}>
-                        <InputLabel htmlFor="new-email">이메일 주소</InputLabel>
-                        <OutlinedInput
-                            id="new-email"
-                            label="이메일 주소"
-                            value={newEmail}
-                            onChange={handleNewEmailChange}
-                        />
-                        {!isNewEmailValid && <FormHelperText>올바른 이메일 형식이 아닙니다.</FormHelperText>}
-                    </FormControl>
-                    <FormControl fullWidth required variant="outlined" color="warning" error={!isNewPasswordValid}>
-                        <InputLabel htmlFor="new-password">비밀번호</InputLabel>
-                        <OutlinedInput
-                            id="new-password"
-                            label="비밀번호"
-                            type="password"
-                            value={newPassword}
-                            onChange={handleNewPasswordChange}
-                        />
-                        {!isNewPasswordValid && <FormHelperText>비밀번호는 최소 6자 이상이어야 합니다.</FormHelperText>}
-                    </FormControl>
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        sx={{
-                            backgroundColor: `var(--color-primary-light)`,
-                            borderRadius: 2,
-                            minHeight: '56px',
-                            fontSize: '1.1rem',
-                        }}
-                        onClick={handleSignup}
-                    >
-                        회원가입
-                    </Button>
-                    <Button
-                        onClick={handleCloseSignupModal}
-                        sx={{
-                            color: `var(--color-primary-light)`,
-                            minHeight: '56px',
-                            fontSize: '1.1rem',
-                        }}
-                    >
-                        취소
-                    </Button>
-                </Box>
-            </Modal>
+            <SignupModal open={openSignupModal} onClose={handleCloseSignupModal} onSignup={handleSignup} />
         </Container>
     );
 };
