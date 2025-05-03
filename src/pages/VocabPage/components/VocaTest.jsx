@@ -18,6 +18,7 @@ const VocabTest = ({ onExit }) => {
   const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
   const [mode, setMode] = useState("wordToMeaning"); // "wordToMeaning" or "meaningToWord"
   const inputRef = useRef(null);
+  const [isCorrect, setIsCorrect] = useState(null);
 
   // 시험 시작
   const startTest = () => {
@@ -74,12 +75,16 @@ const VocabTest = ({ onExit }) => {
 
     const correctAnswers = correct
       .split(/[,/]/)
-      .map((item) => item.trim().toLowerCase()); //답이 2개일 경우도 있어서 하나만 맞아도 정답처리
+      .map((item) => item.trim().toLowerCase());
 
-    if (correctAnswers.includes(userAnswer.trim().toLowerCase())) {
+    const userInput = userAnswer.trim().toLowerCase();
+    const isAnswerCorrect = correctAnswers.includes(userInput);
+
+    if (isAnswerCorrect) {
       setScore((prev) => prev + 1);
     }
 
+    setIsCorrect(isAnswerCorrect);
     setShowAnswer(true);
   };
 
@@ -89,6 +94,7 @@ const VocabTest = ({ onExit }) => {
     setUserAnswer("");
     setShowAnswer(false);
     setTimeLeft(TIME_LIMIT);
+    setIsCorrect(null);
     // 다음 문제 로드시 입력창에 포커스 설정은 아래 useEffect에서 처리됨
   };
 
@@ -162,6 +168,7 @@ const VocabTest = ({ onExit }) => {
         onNextQuestion={handleNext}
         onExit={onExit}
         inputRef={inputRef}
+        isCorrect={isCorrect}
       />
     );
   }

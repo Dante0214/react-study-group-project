@@ -22,6 +22,7 @@ const VocaTestQuiz = ({
   onNextQuestion,
   onExit,
   inputRef,
+  isCorrect,
 }) => (
   <Box
     sx={{
@@ -41,7 +42,12 @@ const VocaTestQuiz = ({
         mx: "auto",
         borderRadius: 4,
         boxShadow: 3,
-        backgroundColor: "background.paper",
+        backgroundColor: showAnswer
+          ? isCorrect === true
+            ? "#e8f5e9"
+            : "#ffebee"
+          : "background.paper",
+        transition: "background-color 0.3s ease",
       }}
     >
       <Box
@@ -64,7 +70,17 @@ const VocaTestQuiz = ({
         sx={{ height: 10, borderRadius: 5, my: 2 }}
       />
 
-      <Box sx={{ p: 3, bgcolor: "#f9f9f9" }}>
+      <Box
+        sx={{
+          p: 3,
+          bgcolor: showAnswer
+            ? isCorrect === true
+              ? "#e8f5e9" // 연한 초록
+              : "#ffebee" // 연한 빨강
+            : "#f9f9f9", // 기본
+          transition: "background-color 0.3s ease",
+        }}
+      >
         <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
           <Typography variant="body2" color="text.secondary" sx={{ mr: 0.5 }}>
             {currentQuestion?.name && "영어 단어"}
