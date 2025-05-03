@@ -13,6 +13,7 @@ import logoWhite from "./images/logo-white.png";
 import iphoneMain from "./images/white-iphone.png";
 import LandingBanner from "./components/LandingBanner";
 import GetStartedButton from "./components/GetStartedButton";
+import vocaTestImg from "./images/voca-test-img.png"
 
 
 const cardData = [
@@ -237,7 +238,7 @@ const LandingPage = () => {
                 fontWeight="bold"
                 fontSize="1em"
               >
-                뉴스 기반 학습 페이지
+                뉴스 기반 학습 미리보기
               </Typography>
             </Box>
 
@@ -269,6 +270,36 @@ const LandingPage = () => {
                 fontSize="1em"
               >
                 단어장 기능 미리보기
+              </Typography>
+            </Box>
+            {/* 단어장 테스트 미리보기 */}
+            <Box sx={{ textAlign: "center", my: 1 }}>
+              <Box
+                component="img"
+                src={vocaTestImg}
+                alt="단어장페이지"
+                onClick={() => setOpenImage(vocaTestImg)}
+                sx={{
+                  cursor: "pointer",
+                  width: { xs: "100%", sm: 400 },
+                  height: { xs: 200, sm: 250 },
+                  borderRadius: 3,
+                  boxShadow: 3,
+                  mb: 1,
+                  transition: "all 0.3s ease-in-out",
+                  "&:hover": {
+                    transform: "scale(1.05)",
+                    boxShadow: 6,
+                  },
+                }}
+              />
+              <Typography
+                variant="body2"
+                color="var(--color-primary)"
+                fontWeight="bold"
+                fontSize="1em"
+              >
+                단어 테스트 미리보기
               </Typography>
             </Box>
           </Box>
