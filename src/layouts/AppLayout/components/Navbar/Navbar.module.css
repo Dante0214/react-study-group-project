@@ -16,6 +16,10 @@
   color: var(--color-text-disabled);
 }
 
+.link:hover {
+  color: var(--color-text-primary);
+}
+
 .link-active {
   color: var(--color-text-primary);
 }

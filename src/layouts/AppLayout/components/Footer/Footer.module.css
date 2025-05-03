@@ -38,6 +38,10 @@
   color: var(--color-text-disabled);
 }
 
+.navigation-link:hover {
+  color: var(--color-text-primary);
+}
+
 .navigation-link-active {
   color: var(--color-text-primary);
 }
