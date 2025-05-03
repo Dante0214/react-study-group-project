@@ -92,7 +92,7 @@ const Footer = () => {
           </>
         )}
         <div>
-          <ListItemButton onClick={handleClick} sx={{ width: '255px' }}>
+          <ListItemButton onClick={handleClick} sx={{ width: '255px', borderRadius: '5px' }}>
             <ListItemIcon>
               <GitHubIcon sx={{ fontSize: '28px' }} />
             </ListItemIcon>
