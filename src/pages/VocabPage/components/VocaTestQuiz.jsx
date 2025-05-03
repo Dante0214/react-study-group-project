@@ -23,6 +23,7 @@ const VocaTestQuiz = ({
   onExit,
   inputRef,
   isCorrect,
+  mode,
 }) => (
   <Box
     sx={{
@@ -42,11 +43,7 @@ const VocaTestQuiz = ({
         mx: "auto",
         borderRadius: 4,
         boxShadow: 3,
-        backgroundColor: showAnswer
-          ? isCorrect === true
-            ? "#e8f5e9"
-            : "#ffebee"
-          : "background.paper",
+        backgroundColor: "background.paper",
         transition: "background-color 0.3s ease",
       }}
     >
@@ -72,23 +69,38 @@ const VocaTestQuiz = ({
 
       <Box
         sx={{
-          p: 3,
+          p: 2,
           bgcolor: showAnswer
             ? isCorrect === true
               ? "#e8f5e9" // 연한 초록
               : "#ffebee" // 연한 빨강
             : "#f9f9f9", // 기본
+          borderRadius: 2,
           transition: "background-color 0.3s ease",
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
           <Typography variant="body2" color="text.secondary" sx={{ mr: 0.5 }}>
-            {currentQuestion?.name && "영어 단어"}
-            {currentQuestion?.meaning && "우리말 뜻"}
+            {typeof currentQuestion === "string"
+              ? mode === "wordToMeaning"
+                ? "영어 단어"
+                : "우리말 뜻"
+              : "문제"}
           </Typography>
         </Box>
 
-        <Typography variant="h4" sx={{ fontWeight: "bold", mb: 3 }}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+            mb: 3,
+            fontSize: {
+              xs: "1.3rem", // 모바일
+              sm: "1.8rem", // 태블릿
+              md: "2.125rem", // 데스크탑 (기본 h4 사이즈)
+            },
+          }}
+        >
           {currentQuestion}
         </Typography>
 
@@ -108,9 +120,17 @@ const VocaTestQuiz = ({
 
         <Box mt={3} display="flex" flexDirection="column">
           {showAnswer && (
-            <Typography>
-              정답: <strong>{correctAnswer}</strong>
-            </Typography>
+            <Box mb={2}>
+              <Typography>
+                정답: <strong>{correctAnswer}</strong>
+              </Typography>
+              <Typography
+                color={isCorrect ? "success.main" : "error.main"}
+                fontWeight="bold"
+              >
+                {isCorrect ? "정답입니다!" : "틀렸습니다."}
+              </Typography>
+            </Box>
           )}
           <Box display="flex" justifyContent="space-between" mt={2}>
             <Button

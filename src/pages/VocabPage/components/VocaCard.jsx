@@ -32,10 +32,14 @@ const VocaCard = ({ item, onDelete }) => {
             삭제
           </Button>
         </Box>
-        <Typography color="var(--color-text-primary)" gutterBottom>
+        <Typography
+          variant="body2"
+          color="var(--color-text-disabled)"
+          gutterBottom
+        >
           {item.class}
         </Typography>
-        <Typography color="var(--color-text-disabled)">
+        <Typography variant="body3" color="var(--color-text-primary)">
           {item.meaning}
         </Typography>
         <Typography

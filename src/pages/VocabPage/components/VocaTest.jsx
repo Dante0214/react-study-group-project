@@ -29,6 +29,7 @@ const VocabTest = ({ onExit }) => {
     setScore(0);
     setShowAnswer(false);
     setTimeLeft(TIME_LIMIT);
+    setIsCorrect(null);
   };
 
   // 모드 전환
@@ -59,6 +60,7 @@ const VocabTest = ({ onExit }) => {
         if (prev <= 1) {
           clearInterval(timer);
           setShowAnswer(true);
+          handleTimeOut();
           return 0;
         }
         return prev - 1;
@@ -68,23 +70,30 @@ const VocabTest = ({ onExit }) => {
     return () => clearInterval(timer);
   }, [quizList, currentIndex, showAnswer]);
 
-  // 정답 체크
+  // 시간 초과 처리 함수 추가
+  const handleTimeOut = () => {
+    setIsCorrect(false);
+  };
+
   const handleCheckAnswer = () => {
     const current = quizList[currentIndex];
     const correct = mode === "wordToMeaning" ? current.meaning : current.name;
 
     const correctAnswers = correct
       .split(/[,/]/)
-      .map((item) => item.trim().toLowerCase());
+      .map((item) => item.trim().toLowerCase()); //답이 2개일 경우도 있어서 하나만 맞아도 정답처리
 
-    const userInput = userAnswer.trim().toLowerCase();
-    const isAnswerCorrect = correctAnswers.includes(userInput);
+    const isAnswerCorrect = correctAnswers.includes(
+      userAnswer.trim().toLowerCase()
+    );
 
     if (isAnswerCorrect) {
       setScore((prev) => prev + 1);
+      setIsCorrect(true);
+    } else {
+      setIsCorrect(false);
     }
 
-    setIsCorrect(isAnswerCorrect);
     setShowAnswer(true);
   };
 
@@ -169,6 +178,7 @@ const VocabTest = ({ onExit }) => {
         onExit={onExit}
         inputRef={inputRef}
         isCorrect={isCorrect}
+        mode={mode}
       />
     );
   }
