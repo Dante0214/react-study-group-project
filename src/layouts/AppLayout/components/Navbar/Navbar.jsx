@@ -14,7 +14,7 @@ const pages = [
   },
 ];
 
-const Navbar = ({ handleCloseMenu }) => {
+const Navbar = ({ handleCloseMenu, setTestMode }) => {
   const { pathname } = useLocation();
 
   const handleVocabClick = () => {
