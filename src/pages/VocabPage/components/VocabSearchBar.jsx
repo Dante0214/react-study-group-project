@@ -44,8 +44,9 @@ const VocabSearchBar = ({
         variant={isTest ? "outlined" : "contained"}
         color="warning"
         onClick={onTestToggle}
+        disabled={!hasItems}
       >
-        {isTest ? "돌아가기" : "테스트 모드"}
+        {isTest ? "돌아가기" : "테스트"}
       </Button>
     </Stack>
   </Stack>
