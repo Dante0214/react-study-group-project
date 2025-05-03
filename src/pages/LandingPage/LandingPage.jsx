@@ -1,9 +1,8 @@
 import React from "react";
 import "./LandingPage.style.css";
-import { Box, Button, Typography, Grid, Container } from "@mui/material";
+import { Box, Typography, Grid, Container } from "@mui/material";
 import mainPageImg from "./images/main-page-img.png";
 import vocaPageImg from "./images/voca-page-img.png";
-import { useNavigate } from "react-router-dom";
 import LandingCardItem from "./components/LandingCardItem";
 import InfoIcon from "@mui/icons-material/Info";
 import StarIcon from "@mui/icons-material/Star";
@@ -13,6 +12,7 @@ import ScrollToTopButton from "../../common/components/Buttons/ScrollToTopButton
 import logoWhite from "./images/logo-white.png";
 import iphoneMain from "./images/white-iphone.png";
 import LandingBanner from "./components/LandingBanner";
+import GetStartedButton from "./components/GetStartedButton"
 
 const cardData = [
   {
@@ -39,11 +39,6 @@ const cardData = [
 
 const LandingPage = () => {
   const [openImage, setOpenImage] = React.useState(null);
-  const navigate = useNavigate();
-
-  const handleStartClick = () => {
-    navigate("/login");
-  };
 
   return (
     <div>
@@ -62,6 +57,7 @@ const LandingPage = () => {
         }}
       >
         <LandingBanner />
+        <GetStartedButton />
         <Box
           sx={{
             flex: "5 1 0%",
@@ -183,34 +179,7 @@ const LandingPage = () => {
             bgcolor: "#fff",
           }}
         >
-          <Box
-            sx={{
-              position: "absolute",
-              top: 0,
-              right: 25,
-              display: { xs: "none", sm: "block" },
-            }}
-          >
-            <Button
-              variant="contained"
-              onClick={handleStartClick}
-              sx={{
-                borderTopLeftRadius: 0,
-                borderTopRightRadius: 0,
-                bgcolor: "var(--color-primary)",
-                color: "#fff",
-                fontWeight: "bold",
-                zIndex: 10,
-                transition: "all 0.3s ease-in-out",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                  boxShadow: 6,
-                },
-              }}
-            >
-              Get started
-            </Button>
-          </Box>
+       
           {/*버전1 카드 데이터 */}
           <Box sx={{ marginTop: { xs: 0, md: 2 } }}>
             <Grid
