@@ -55,7 +55,7 @@ const VocabPage = () => {
     }
     setSearchQuery(""); // 검색 상태 초기화
     setTestMode(false);
-    navigate("/vocab");
+    // navigate("/vocab");
   };
 
   // console.log(checkedList);
