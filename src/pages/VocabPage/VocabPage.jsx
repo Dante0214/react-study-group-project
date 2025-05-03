@@ -44,11 +44,6 @@ const VocabPage = () => {
     }
   };
 
-  //테스트모드 상태관리
-  // const toggleTestMode = () => {
-  //   setIsTest((prev) => !prev);
-  // };
-
   const handleNavigate = () => {
     if (searchInputRef.current) {
       searchInputRef.current.value = ""; //입력값 초기화
@@ -57,10 +52,6 @@ const VocabPage = () => {
     setTestMode(false);
     navigate("/vocab");
   };
-
-  // console.log(checkedList);
-  // console.log(checkedVocab);
-  console.log(myVocabList);
   return (
     <Box
       sx={{
