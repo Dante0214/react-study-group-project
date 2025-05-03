@@ -12,7 +12,8 @@ import ScrollToTopButton from "../../common/components/Buttons/ScrollToTopButton
 import logoWhite from "./images/logo-white.png";
 import iphoneMain from "./images/white-iphone.png";
 import LandingBanner from "./components/LandingBanner";
-import GetStartedButton from "./components/GetStartedButton"
+import GetStartedButton from "./components/GetStartedButton";
+
 
 const cardData = [
   {
