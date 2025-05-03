@@ -22,7 +22,6 @@ const Words = ({ newsObject, isLoading, setHoveredWord }) => {
 
   const { setMyVocabList, myVocabList } = useVocabStore();
 
-  console.log(myVocabList);
 
   // newsObject가 변경되면 단어와 숙어 목록 업데이트
   useEffect(() => {
