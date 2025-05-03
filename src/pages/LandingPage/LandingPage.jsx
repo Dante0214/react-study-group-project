@@ -79,6 +79,7 @@ const LandingPage = () => {
             sx={{ width: { xs: "100%", md: "60%" } }}
             display="flex"
             justifyContent="center"
+            spacing={3}
           >
             <Grid
               size={{ md: 6, sm: 12 }}
@@ -147,15 +148,19 @@ const LandingPage = () => {
                 sx={{
                   position: "absolute",
                   top: { md: "150px" },
+                  left: {md: '20px'},
                   cursor: "pointer",
                   transition: "all 0.4s ease-in-out",
+                  borderRadius:'56px',
+                  boxShadow:2,
                   "&:hover": {
                     top: { md: "-90px" },
                     transform: "scale(1.05)",
+                    boxShadow: 10,
                   },
                 }}
               >
-                <img src={`${iphoneMain}`} alt="아이폰목업" width="400px" />
+                <img src={`${iphoneMain}`} alt="아이폰목업" width="300px" />
               </Box>
             </Grid>
           </Grid>
