@@ -35,6 +35,9 @@ const GetStartedButton = () => {
           sx: {
             bgcolor: "var(--color-primary)",
             color: "#fff",
+            fontSize:{md:'15px'},
+            whiteSpace: "nowrap",
+            fontWeight:'bold'
           },
         },
         arrow: {
@@ -63,8 +66,9 @@ const GetStartedButton = () => {
             bgcolor: "var(--color-text-primary)",
             color: "white",
             fontWeight: "bold",
-            px: 3,
-            py: 1.5,
+            fontSize:{md:'24px'},
+            px: {xs:3,md:5},
+            py: {xs:1.5,md:3},
             borderRadius: "999px",
             boxShadow: 4,
             transition: "all 0.3s ease",
