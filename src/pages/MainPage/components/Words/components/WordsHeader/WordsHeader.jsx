@@ -6,7 +6,7 @@ const WordsHeader = ({ selectedWordCount, onSaveAllWords }) => {
   return (
     <Box className="words-header">
       <Typography variant="h1" className="words-title">
-        📚 오늘의 단어
+      📙 오늘의 단어
       </Typography>
       <Badge 
         badgeContent={selectedWordCount} 

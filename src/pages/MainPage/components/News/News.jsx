@@ -85,10 +85,10 @@ const News = ({
     <Box className="news-container">
       <Box className="news-title-container">
         <Typography variant="h1" className="news-title">
-          📚 오늘의 기사
+        📙 오늘의 기사
         </Typography>
 
-        <FormControl sx={{ minWidth: 100, marginLeft: 1 }}>
+        <FormControl sx={{ maxWidth: 120, minWidth: 80, marginLeft: 1 }}>
           <InputLabel id="topic-select-label">Topic</InputLabel>
           <Select
             labelId="topic-select-label"
@@ -103,10 +103,10 @@ const News = ({
               <em>Any</em>
             </MenuItem>
             <MenuItem value="IT">IT</MenuItem>
-            <MenuItem value="Politics">Politics</MenuItem>
-            <MenuItem value="Economy">Economy</MenuItem>
-            <MenuItem value="Sports">Sports</MenuItem>
-            <MenuItem value="Entertainment">Entertainment</MenuItem>
+            <MenuItem value="Politics">정치</MenuItem>
+            <MenuItem value="Economy">경제</MenuItem>
+            <MenuItem value="Sports">스포츠</MenuItem>
+            <MenuItem value="Entertainment">연예</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -168,7 +168,6 @@ const News = ({
         variant="contained"
         onClick={handleLoadNewsClick}
       >
-        <span className="button-icon">🗞️</span>
         {topicDisplayText} 기사 불러오기
       </Button>
     </Box>
