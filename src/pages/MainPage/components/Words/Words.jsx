@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Box } from "@mui/material";
 import "./Words.style.css";
 import { useVocabStore } from "../../../../stores/vocabStore";
+import { useNavigate } from "react-router-dom";
 
 // 컴포넌트 불러오기
 import WordsHeader from "./components/WordsHeader/WordsHeader";
@@ -21,8 +22,7 @@ const Words = ({ newsObject, isLoading, setHoveredWord }) => {
   const [idioms, setIdioms] = useState(newsObject?.idioms || []);
 
   const { setMyVocabList, myVocabList } = useVocabStore();
-
-  console.log(myVocabList);
+  const navigate = useNavigate();
 
   // newsObject가 변경되면 단어와 숙어 목록 업데이트
   useEffect(() => {
@@ -122,6 +122,14 @@ const Words = ({ newsObject, isLoading, setHoveredWord }) => {
         }가 저장되었습니다.`
       );
 
+      // 단어가 저장된 경우에만 내 단어장으로 이동할지 물어봄
+      if (newItems.length > 0) {
+        const moveToVocab = window.confirm("새로 저장된 단어가 있습니다. 내 단어장으로 이동하시겠습니까?");
+        if (moveToVocab) {
+          navigate("/vocab"); // 내 단어장 페이지로 이동
+        }
+      }
+
       // 체크 상태 초기화 (현재 탭만)
       setSavedWordNames((prev) => ({
         ...prev,
@@ -131,7 +139,7 @@ const Words = ({ newsObject, isLoading, setHoveredWord }) => {
       console.error("단어 저장 중 오류 발생:", error);
       alert("단어 저장 중 오류가 발생했습니다.");
     }
-  }, [tabValue, words, idioms, savedWordNames, myVocabList, setMyVocabList]);
+  }, [tabValue, words, idioms, savedWordNames, myVocabList, setMyVocabList, navigate]);
 
   // 선택된 단어 개수 계산
   const selectedWordCount = useCallback(() => {
