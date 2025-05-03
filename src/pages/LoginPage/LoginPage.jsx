@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
     Container,
     Box,
@@ -27,10 +27,20 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [rememberId, setRememberId] = useState(false); // 아이디 기억하기 체크 상태
     const emailInputRef = useRef(null);
     const passwordInputRef = useRef(null);
     const navigate = useNavigate();
     const { isLoggedIn, setLogin } = useAuthStore();
+
+    // 페이지 로드 시 저장된 이메일이 있는지 확인
+    useEffect(() => {
+        const storedEmail = localStorage.getItem('rememberedEmail');
+        if (storedEmail) {
+            setEmail(storedEmail);
+            setRememberId(true); // 저장된 이메일이 있으면 체크박스도 체크
+        }
+    }, []);
 
     // 로그인 상태이면 메인 페이지로 리디렉트
     if (isLoggedIn) {
@@ -49,6 +59,10 @@ const LoginPage = () => {
         setPassword(event.target.value);
     };
 
+    const handleRememberIdChange = (event) => {
+        setRememberId(event.target.checked);
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -62,8 +76,15 @@ const LoginPage = () => {
             return;
         }
 
-        console.log('로그인 시도:', { email, password });
-        // 실제 로그인 처리 로직
+        console.log('로그인 시도:', { email, password, rememberId });
+        // 아이디 기억하기 체크 시 localStorage에 이메일 저장
+        if (rememberId) {
+            localStorage.setItem('rememberedEmail', email);
+        } else {
+            localStorage.removeItem('rememberedEmail');
+        }
+
+        // 실제 로그인 처리 로직 (현재는 상태만 변경)
         setLogin();
         // 로그인 성공 시 메인페이지 이동, 로그인 성공시 로그인 페이지로 돌아가기 방지
         navigate('/main', { replace: true });
@@ -135,7 +156,17 @@ const LoginPage = () => {
                             }
                         />
                     </FormControl>
-                    <FormControlLabel control={<Checkbox value="remember" color="warning" />} label="아이디 기억하기" />
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                value="remember"
+                                color="warning"
+                                checked={rememberId}
+                                onChange={handleRememberIdChange}
+                            />
+                        }
+                        label="아이디 기억하기"
+                    />
                     <Box sx={{ mt: 2, mb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
                         <Button
                             type="submit"
