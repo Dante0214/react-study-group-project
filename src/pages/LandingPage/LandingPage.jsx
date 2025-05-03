@@ -1,9 +1,8 @@
 import React from "react";
 import "./LandingPage.style.css";
-import { Box, Button, Typography, Grid, Container } from "@mui/material";
+import { Box, Typography, Grid, Container } from "@mui/material";
 import mainPageImg from "./images/main-page-img.png";
 import vocaPageImg from "./images/voca-page-img.png";
-import { useNavigate } from "react-router-dom";
 import LandingCardItem from "./components/LandingCardItem";
 import InfoIcon from "@mui/icons-material/Info";
 import StarIcon from "@mui/icons-material/Star";
@@ -13,6 +12,7 @@ import ScrollToTopButton from "../../common/components/Buttons/ScrollToTopButton
 import logoWhite from "./images/logo-white.png";
 import iphoneMain from "./images/white-iphone.png";
 import LandingBanner from "./components/LandingBanner";
+import GetStartedButton from "./components/GetStartedButton"
 
 const cardData = [
   {
@@ -25,25 +25,20 @@ const cardData = [
   {
     title: "AI 단어 정리",
     description: "AI가 기사 속 단어들을 자동으로 추출해 리스트로 정리해줘요.",
-    color: "var(--color-text-secondary)",
+    color: "var(--color-text-primary)",
     icon: <StarIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
   {
     title: "손 안의 단어장",
     description:
       "내가 저장한 단어와 예문을 한눈에! 언제 어디서든 복습할 수 있어요.",
-    color: "var(--color-text-disabled)",
+    color: "var(--color-text-primary)",
     icon: <CheckCircleIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
 ];
 
 const LandingPage = () => {
   const [openImage, setOpenImage] = React.useState(null);
-  const navigate = useNavigate();
-
-  const handleStartClick = () => {
-    navigate("/login");
-  };
 
   return (
     <div>
@@ -62,6 +57,7 @@ const LandingPage = () => {
         }}
       >
         <LandingBanner />
+        <GetStartedButton />
         <Box
           sx={{
             flex: "5 1 0%",
@@ -83,6 +79,7 @@ const LandingPage = () => {
             sx={{ width: { xs: "100%", md: "60%" } }}
             display="flex"
             justifyContent="center"
+            spacing={3}
           >
             <Grid
               size={{ md: 6, sm: 12 }}
@@ -151,15 +148,19 @@ const LandingPage = () => {
                 sx={{
                   position: "absolute",
                   top: { md: "150px" },
+                  left: {md: '20px'},
                   cursor: "pointer",
                   transition: "all 0.4s ease-in-out",
+                  borderRadius:'56px',
+                  boxShadow:2,
                   "&:hover": {
                     top: { md: "-90px" },
                     transform: "scale(1.05)",
+                    boxShadow: 10,
                   },
                 }}
               >
-                <img src={`${iphoneMain}`} alt="아이폰목업" width="400px" />
+                <img src={`${iphoneMain}`} alt="아이폰목업" width="300px" />
               </Box>
             </Grid>
           </Grid>
@@ -183,34 +184,7 @@ const LandingPage = () => {
             bgcolor: "#fff",
           }}
         >
-          <Box
-            sx={{
-              position: "absolute",
-              top: 0,
-              right: 25,
-              display: { xs: "none", sm: "block" },
-            }}
-          >
-            <Button
-              variant="contained"
-              onClick={handleStartClick}
-              sx={{
-                borderTopLeftRadius: 0,
-                borderTopRightRadius: 0,
-                bgcolor: "var(--color-primary)",
-                color: "#fff",
-                fontWeight: "bold",
-                zIndex: 10,
-                transition: "all 0.3s ease-in-out",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                  boxShadow: 6,
-                },
-              }}
-            >
-              Get started
-            </Button>
-          </Box>
+       
           {/*버전1 카드 데이터 */}
           <Box sx={{ marginTop: { xs: 0, md: 2 } }}>
             <Grid
