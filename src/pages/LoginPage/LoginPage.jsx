@@ -14,7 +14,8 @@ import {
     InputLabel,
     OutlinedInput,
     Typography,
-    Modal, // Modal 컴포넌트 import
+    Modal,
+    FormHelperText,
 } from '@mui/material';
 
 import './LoginPage.style.css';
@@ -35,11 +36,12 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const { isLoggedIn, setLogin } = useAuthStore();
 
+    const [isNewPasswordValid, setIsNewPasswordValid] = useState(true);
     // 회원가입 모달 상태
     const [openSignupModal, setOpenSignupModal] = useState(false);
     const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
-
+    const [isNewEmailValid, setIsNewEmailValid] = useState(false);
     useEffect(() => {
         const storedEmail = localStorage.getItem('rememberedEmail');
         if (storedEmail) {
@@ -86,7 +88,20 @@ const LoginPage = () => {
             navigate('/main', { replace: true });
         } catch (error) {
             console.error('이메일 로그인 실패:', error);
-            // 로그인 실패 처리 (예: 에러 메시지 표시)
+            let errorMessage = '로그인에 실패했습니다. 다시 시도해주세요.';
+
+            switch (error.code) {
+                case 'auth/user-not-found':
+                    errorMessage = '존재하지 않는 이메일 주소입니다.';
+                    break;
+                case 'auth/wrong-password':
+                    errorMessage = '비밀번호가 일치하지 않습니다.';
+                    break;
+                case 'auth/invalid-login-credentials':
+                    errorMessage = '이메일 주소 또는 비밀번호가 올바르지 않습니다.';
+                    break;
+            }
+            alert(errorMessage);
         }
 
         if (rememberId) {
@@ -123,31 +138,52 @@ const LoginPage = () => {
         setNewPassword('');
     };
 
+    const isValidEmail = (email) => {
+        // 간단한 이메일 형식 검사 정규 표현식
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
     // 새 이메일 상태 업데이트
     const handleNewEmailChange = (event) => {
-        setNewEmail(event.target.value);
+        const newEmailValue = event.target.value;
+        setNewEmail(newEmailValue);
+        setIsNewEmailValid(isValidEmail(newEmailValue)); // 유효성 검사 후 상태 업데이트
     };
 
     // 새 비밀번호 상태 업데이트
     const handleNewPasswordChange = (event) => {
-        setNewPassword(event.target.value);
+        const newPasswordValue = event.target.value;
+        setNewPassword(newPasswordValue);
+        setIsNewPasswordValid(newPasswordValue.length >= 6); // 최소 6자 이상인지 확인
     };
 
     // 회원가입 처리
     const handleSignup = async () => {
-        if (!newEmail || !newPassword) {
-            // 간단한 유효성 검사
-            alert('이메일과 비밀번호를 입력해주세요.');
+        if (!isNewEmailValid || !isNewPasswordValid || !newEmail || !newPassword) {
+            // 유효성 검사 실패 시 추가 알림 (선택 사항)
+            alert('이메일과 비밀번호를 올바르게 입력해주세요.');
             return;
         }
         try {
             const result = await createUser(newEmail, newPassword);
             console.log('회원가입 성공:', result.user);
             alert('회원가입이 완료되었습니다. 로그인해주세요.');
-            handleCloseSignupModal(); // 회원가입 성공 후 모달 닫기
+            handleCloseSignupModal();
         } catch (error) {
             console.error('회원가입 실패:', error);
-            alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+            let errorMessage = '회원가입에 실패했습니다. 다시 시도해주세요.';
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    errorMessage = '이미 사용 중인 이메일 주소입니다.';
+                    break;
+                case 'auth/invalid-email':
+                    errorMessage = '유효하지 않은 이메일 주소입니다.';
+                    break;
+                case 'auth/weak-password':
+                    errorMessage = '비밀번호가 너무 짧거나 안전하지 않습니다. 6자 이상으로 입력해주세요.';
+                    break;
+            }
+            alert(errorMessage);
             // 회원가입 실패 처리 (예: 에러 메시지 표시)
         }
     };
@@ -300,7 +336,7 @@ const LoginPage = () => {
                     <Typography id="signup-modal-title" variant="h6" component="h2">
                         회원가입
                     </Typography>
-                    <FormControl fullWidth required variant="outlined" color="warning">
+                    <FormControl fullWidth required variant="outlined" color="warning" error={!isNewEmailValid}>
                         <InputLabel htmlFor="new-email">이메일 주소</InputLabel>
                         <OutlinedInput
                             id="new-email"
@@ -308,8 +344,9 @@ const LoginPage = () => {
                             value={newEmail}
                             onChange={handleNewEmailChange}
                         />
+                        {!isNewEmailValid && <FormHelperText>올바른 이메일 형식이 아닙니다.</FormHelperText>}
                     </FormControl>
-                    <FormControl fullWidth required variant="outlined" color="warning">
+                    <FormControl fullWidth required variant="outlined" color="warning" error={!isNewPasswordValid}>
                         <InputLabel htmlFor="new-password">비밀번호</InputLabel>
                         <OutlinedInput
                             id="new-password"
@@ -318,6 +355,7 @@ const LoginPage = () => {
                             value={newPassword}
                             onChange={handleNewPasswordChange}
                         />
+                        {!isNewPasswordValid && <FormHelperText>비밀번호는 최소 6자 이상이어야 합니다.</FormHelperText>}
                     </FormControl>
                     <Button
                         fullWidth
