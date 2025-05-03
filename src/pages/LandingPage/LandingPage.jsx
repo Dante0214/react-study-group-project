@@ -25,14 +25,14 @@ const cardData = [
   {
     title: "AI 단어 정리",
     description: "AI가 기사 속 단어들을 자동으로 추출해 리스트로 정리해줘요.",
-    color: "var(--color-text-secondary)",
+    color: "var(--color-text-primary)",
     icon: <StarIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
   {
     title: "손 안의 단어장",
     description:
       "내가 저장한 단어와 예문을 한눈에! 언제 어디서든 복습할 수 있어요.",
-    color: "var(--color-text-disabled)",
+    color: "var(--color-text-primary)",
     icon: <CheckCircleIcon sx={{ color: "#fff", fontSize: 30 }} />,
   },
 ];
