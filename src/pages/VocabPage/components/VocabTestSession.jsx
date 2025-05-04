@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   Box,
   Button,
@@ -39,11 +39,6 @@ const VocabTestSession = ({
         return "단어 시험";
     }
   };
-
-  // showAnswer 상태가 변경될 때마다 로그 출력
-  useEffect(() => {
-    console.log("showAnswer 상태:", showAnswer);
-  }, [showAnswer]);
 
   // 타이머 설정
   useEffect(() => {
@@ -89,6 +84,15 @@ const VocabTestSession = ({
       document.removeEventListener("keydown", handleKeyPress);
     };
   }, [showAnswer, handleNext]);
+
+  const handlePlaySound = useCallback((word) => {
+    // TTS API 사용
+    if ("speechSynthesis" in window) {
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = "en-US";
+      speechSynthesis.speak(utterance);
+    }
+  }, []);
 
   return (
     <Box
@@ -159,13 +163,30 @@ const VocabTestSession = ({
             >
               {headerText()}
             </Typography>
+            <Box
+              component="span"
+              sx={{
+                fontSize: "14px",
+                lineHeight: 1,
+                cursor: "pointer",
+                verticalAlign: "middle",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePlaySound(question);
+              }}
+            >
+              🔊
+            </Box>
           </Box>
 
           <Typography
             variant="h1"
             sx={{
               fontWeight: "bold",
-              mb: 3,
+              my: 3,
               color: "var(--color-text-primary)",
 
               fontSize: {
@@ -198,12 +219,12 @@ const VocabTestSession = ({
             남은 시간: {timeLeft}초
           </Typography>
 
-          <Box mt={3} display="flex" flexDirection="column">
+          <Box mt={1} display="flex" flexDirection="column">
             {showAnswer && (
               <Typography
                 variant="subtitle1"
-                color="primary"
-                sx={{ mb: 2, fontWeight: "bold" }}
+                color="warning"
+                sx={{ fontWeight: "bold" }}
               >
                 정답: <strong>{correctAnswer}</strong>
               </Typography>
