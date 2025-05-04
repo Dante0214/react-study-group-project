@@ -71,6 +71,7 @@ const GetStartedButton = () => {
             py: {xs:1.5,md:3},
             borderRadius: "999px",
             boxShadow: 4,
+            whiteSpace: "nowrap",
             transition: "all 0.3s ease",
             "&:hover": {
               transform: "scale(1.05)",
