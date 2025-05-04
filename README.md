@@ -2,7 +2,6 @@
   <img src="./src/assets/ddalkkak.png" alt="딸깍영어 로고" width="180" />
 </p>
 
-<h1 align="center">딸깍영어</h1>
 
 > AI가 뉴스 기사를 분석해 단어를 자동 추출해주는  
 > 대한민국 1위! AI 기반 영어 단어 학습 플랫폼
