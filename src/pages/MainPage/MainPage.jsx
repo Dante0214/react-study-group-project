@@ -4,7 +4,7 @@ import News from "./components/News/News";
 import Words from "./components/Words/Words";
 import { useGetWebSearch } from "../../hooks/useGPT";
 import { useNewsStore } from "../../stores/newsStore";
-
+import ScrollToTopButton from "../../common/components/Buttons/ScrollToTopButton";
 const MainPage = () => {
   // newsStore에서 상태와 액션 가져오기
   const { 
@@ -114,9 +114,10 @@ const MainPage = () => {
 
   return (
     <div className="main-page-container">
-      <h1 className="main-page-title">영어 학습 대시보드</h1>
+      <ScrollToTopButton />
+      <h1 className="main-page-title">딸깍으로 완성하는 영어 학습</h1>
       <p className="main-page-description">
-        오늘의 기사와 중요 단어를 통해 영어 실력을 향상시키세요!
+        오늘의 기사와 중요 단어를 통해 영어 실력을 향상시키세요 🚀
       </p>
 
       <div className="main-page-content">

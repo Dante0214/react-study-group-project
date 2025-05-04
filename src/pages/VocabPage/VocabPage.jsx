@@ -7,20 +7,26 @@ import VocabSearchBar from "./components/VocabSearchBar";
 import VocaCard from "./components/VocaCard";
 import { useNavigate } from "react-router-dom";
 import VocabTest from "./components/VocaTest";
+import { useTestModeStore } from "../../stores/testModeStore";
 
 const VocabPage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef("");
-  const [isTest, setIsTest] = useState(false);
+
   const { myVocabList, deleteMyVocab, clearMyVocabList } = useVocabStore();
+  const { isTestMode, toggleTestMode, setTestMode } = useTestModeStore();
 
   // 단어 혹은 뜻 검색
-  const searchedList = myVocabList.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.meaning.includes(searchQuery)
-  );
+  const searchedList = myVocabList.filter((item) => {
+    // item.name과 item.meaning이 존재하는지 확인 후 .toLowerCase() 호출
+    return (
+      (item.name &&
+        item.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (item.meaning &&
+        item.meaning.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+  });
 
   // 삭제 핸들러
   const handleDelete = (item) => {
@@ -38,23 +44,14 @@ const VocabPage = () => {
     }
   };
 
-  //테스트모드 상태관리
-  const toggleTestMode = () => {
-    setIsTest((prev) => !prev);
-  };
-
   const handleNavigate = () => {
     if (searchInputRef.current) {
       searchInputRef.current.value = ""; //입력값 초기화
     }
     setSearchQuery(""); // 검색 상태 초기화
-    setIsTest(false);
+    setTestMode(false);
     navigate("/vocab");
   };
-
-  // console.log(checkedList);
-  // console.log(checkedVocab);
-  console.log(myVocabList);
   return (
     <Box
       sx={{
@@ -73,7 +70,7 @@ const VocabPage = () => {
             minHeight: "60vh",
           }}
         >
-          {isTest ? (
+          {isTestMode ? (
             <VocabTest mode="wordToMeaning" onExit={toggleTestMode} />
           ) : (
             <>
@@ -103,7 +100,7 @@ const VocabPage = () => {
                 searchInputRef={searchInputRef}
                 onSearch={executeSearch}
                 onTestToggle={toggleTestMode}
-                isTest={isTest}
+                isTest={isTestMode}
                 handleKeyPress={handleKeyPress}
                 onClear={clearMyVocabList}
                 hasItems={myVocabList.length > 0}

@@ -5,18 +5,22 @@
   background-color: var(--color-background);
 }
 
-.main-page-title {
-  color: var(--color-text-primary);
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 28px;
-}
+  .main-page-title {
+    background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary), var(--color-primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 0;
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: bolder;
+  }
 
 .main-page-description {
   color: var(--color-text-secondary);
   text-align: center;
+  margin-top: 10px;
   margin-bottom: 30px;
-  font-size: 16px;
+  font-size: clamp(16px, 2vw, 20px);
 }
 
 .main-page-content {
