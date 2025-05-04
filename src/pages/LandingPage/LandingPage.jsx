@@ -1,19 +1,17 @@
 import React from "react";
 import "./LandingPage.style.css";
 import { Box, Typography, Grid, Container } from "@mui/material";
-import mainPageImg from "./images/main-page-img.png";
-import vocaPageImg from "./images/voca-page-img.png";
 import LandingCardItem from "./components/LandingCardItem";
 import InfoIcon from "@mui/icons-material/Info";
 import StarIcon from "@mui/icons-material/Star";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { Dialog, DialogContent } from "@mui/material";
 import ScrollToTopButton from "../../common/components/Buttons/ScrollToTopButton";
 import logoWhite from "./images/logo-white.png";
 import iphoneMain from "./images/white-iphone.png";
 import LandingBanner from "./components/LandingBanner";
 import GetStartedButton from "./components/GetStartedButton";
-import vocaTestImg from "./images/voca-test-img.png"
+import PreviewPage from "./components/PreviewPage";
+
 
 
 const cardData = [
@@ -40,7 +38,7 @@ const cardData = [
 ];
 
 const LandingPage = () => {
-  const [openImage, setOpenImage] = React.useState(null);
+  
 
   return (
     <div>
@@ -210,120 +208,24 @@ const LandingPage = () => {
               ))}
             </Grid>
           </Box>
-          <Box sx={{ display: { xs: "block", md: "flex" }, gap: 3 }}>
-            {/* 메인 페이지 이미지 */}
-            <Box sx={{ textAlign: "center", my: 1 }}>
-              <Box
-                component="img"
-                src={mainPageImg}
-                alt="메인페이지"
-                onClick={() => setOpenImage(mainPageImg)}
-                sx={{
-                  cursor: "pointer",
-                  width: { xs: "100%", sm: 400 },
-                  height: { xs: 200, sm: 250 },
-                  borderRadius: 3,
-                  boxShadow: 3,
-                  mb: 1,
-                  transition: "all 0.3s ease-in-out",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                    boxShadow: 6,
-                  },
-                }}
-              />
-              <Typography
-                variant="body2"
-                color="var(--color-primary)"
-                fontWeight="bold"
-                fontSize="1em"
-              >
-                뉴스 기반 학습 미리보기
-              </Typography>
-            </Box>
+ 
+         
+          <Typography
+                  variant="body2"
+                  color="var(--color-primary)"
+                  fontWeight="bolder"
+                  sx={{
+                    fontSize: { xs: "1em", md: "1.5em" },
+                    whiteSpace: "nowrap",
+                  }}
+                >
 
-            {/* 단어장 페이지 이미지 */}
-            <Box sx={{ textAlign: "center", my: 1 }}>
-              <Box
-                component="img"
-                src={vocaPageImg}
-                alt="단어장페이지"
-                onClick={() => setOpenImage(vocaPageImg)}
-                sx={{
-                  cursor: "pointer",
-                  width: { xs: "100%", sm: 400 },
-                  height: { xs: 200, sm: 250 },
-                  borderRadius: 3,
-                  boxShadow: 3,
-                  mb: 1,
-                  transition: "all 0.3s ease-in-out",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                    boxShadow: 6,
-                  },
-                }}
-              />
-              <Typography
-                variant="body2"
-                color="var(--color-primary)"
-                fontWeight="bold"
-                fontSize="1em"
-              >
-                단어장 기능 미리보기
-              </Typography>
-            </Box>
-            {/* 단어장 테스트 미리보기 */}
-            <Box sx={{ textAlign: "center", my: 1 }}>
-              <Box
-                component="img"
-                src={vocaTestImg}
-                alt="단어장페이지"
-                onClick={() => setOpenImage(vocaTestImg)}
-                sx={{
-                  cursor: "pointer",
-                  width: { xs: "100%", sm: 400 },
-                  height: { xs: 200, sm: 250 },
-                  borderRadius: 3,
-                  boxShadow: 3,
-                  mb: 1,
-                  transition: "all 0.3s ease-in-out",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                    boxShadow: 6,
-                  },
-                }}
-              />
-              <Typography
-                variant="body2"
-                color="var(--color-primary)"
-                fontWeight="bold"
-                fontSize="1em"
-              >
-                단어 테스트 미리보기
-              </Typography>
-            </Box>
-          </Box>
+                 🤔 구경하기
+                </Typography>
+          <PreviewPage/>
+     
         </Box>
-        {/* 미리보기 모달 */}
-        <Dialog
-          open={Boolean(openImage)}
-          onClose={() => setOpenImage(null)}
-          maxWidth="lg"
-        >
-          <DialogContent sx={{ p: 0 }}>
-            <Box
-              component="img"
-              src={openImage}
-              alt="미리보기 이미지"
-              sx={{
-                width: "100%",
-                height: "auto",
-                maxHeight: "80vh",
-                objectFit: "contain",
-              }}
-            />
-          </DialogContent>
-        </Dialog>
+       
       </Container>
     </div>
   );
