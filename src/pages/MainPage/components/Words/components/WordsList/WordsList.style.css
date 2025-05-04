@@ -10,6 +10,7 @@
   flex-direction: column;
   gap: 12px;
   min-height: 200px;
+  background-color: var(--color-background-alt);
 }
 
 .words-empty {
