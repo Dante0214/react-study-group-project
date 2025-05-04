@@ -1,4 +1,3 @@
-// SignupModal.js
 import React from 'react';
 import { Box, Button, FormControl, InputLabel, OutlinedInput, Typography, Modal, FormHelperText } from '@mui/material';
 import useSignupStore from '../../../stores/signupStore';
