@@ -71,7 +71,7 @@ Web search tool을 이용해, 주제: ${currentTopic}와 관련된 가장 최근
      date: "기사 날짜",
      source: {
        name: "기사 출처",
-       url: "기사 출처 URL"
+       url: "기사의 정확한 페이지 URL 경로"
       }
     }
 
