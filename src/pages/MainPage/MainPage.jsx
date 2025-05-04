@@ -33,38 +33,47 @@ Web search tool을 이용해, 주제: ${currentTopic}와 관련된 가장 최근
 - 반드시 기사 내용에 실제로 등장한 표현만 선별할 것
 - 각 단어/숙어마다 한글 의미와 품사, 예문 제공
 - 숙어 표현이 없을 경우 중요 구문이라도 추출하고, 정말 없다면 빈 배열로 표시
-- 제목(title)과 내용(content)은 영어로, 의미(meaning)와 품사(class)는 한글로 제공
+- 반드시 제목(title)과 내용(content)은 영어로, 의미(meaning)와 품사(class)는 한글로 제공
 - 예문은 기사 내용과 연관되게 작성하거나 실제 기사에서 발췌
 
 응답은 다음 JSON 형식으로만 제공하세요:
 
-{
-  "title": "기사 제목 (영어)",
-  "content": "기사 내용 (영어, 출처 문구 제외)",
-  "words": [
     {
-      "name": "단어",
-      "meaning": "한글 의미",
-      "class": "품사 (한글)",
-      "example": "예문 (영어)"
-    },
-    ...
-  ],
-  "idioms": [
-    {
-      "name": "숙어/구문",
-      "meaning": "한글 의미",
-      "class": "품사/구분 (한글)",
-      "example": "예문 (영어)"
-    },
-    ...
-  ],
-  "date": "기사 발행일",
-  "source": {
-    "name": "출처 이름",
-    "url": "기사 URL"
-  }
-}
+     title: "Title of the news",
+     content: "Content of the news(English, do not include the source)",
+     words: [{
+      name: "artificial intelligence"
+      meaning: "인공 지능"
+      class: "명사"
+      example: "I'm going to the AI conference next week." 
+      }, {
+      name: "revolutionize"
+      meaning: "혁신하다"
+      class: "동사"
+      example: "The new AI model will revolutionize the industry." 
+      }, {
+      name: "healthcare delivery"
+      meaning: "의료 서비스 제공"
+      class: "명사"
+      example: "The new candidate will support the healthcare delivery system." 
+      } ...],
+     idioms: [{
+      name: "break a leg"
+      meaning: "좋은 성과를 내다"
+      class: "동사"
+      example: "I'm sure you'll break a leg at the interview."
+      }, {
+      name: "hit the books"
+      meaning: "공부하다"
+      class: "동사"
+      example: "I'm going to hit the books for the exam."
+      } ...],
+     date: "기사 날짜",
+     source: {
+       name: "기사 출처",
+       url: "기사 출처 URL"
+      }
+    }
 
 주의사항:
 - JSON 형식 외의 어떤 텍스트나 코드 블록, 백틱도 포함하지 마세요
