@@ -7,22 +7,13 @@
 
 ---
 
-## 📱 미리보기 (모바일 기준)
+## 📱 모바일 UI 미리보기
 
-### 🟠 랜딩 페이지
-![랜딩페이지](./public/screenshots/landing.png)
+| 랜딩 | 로그인 | 기사 | 단어장 | 테스트 |
+|:--:|:--:|:--:|:--:|:--:|
+| ![랜딩](./public/screenshots/landing.jpeg) | ![로그인](./public/screenshots/login.jpeg) | ![기사](./public/screenshots/main.jpeg) | ![단어장](./public/screenshots/vocab.jpeg) | ![테스트](./public/screenshots/test.jpeg) |
 
-### 🟠 로그인 페이지
-![로그인페이지](./public/screenshots/login.png)
-
-### 🟠 메인 페이지 (오늘의 기사 + 단어 추출)
-![메인페이지](./public/screenshots/main.png)
-
-### 🟠 단어장 기능
-![단어장](./public/screenshots/vocab.png)
-
-### 🟠 단어 테스트
-![단어테스트](./public/screenshots/test.png)
+> ✨ 주요 기능: 기사 기반 단어 학습 · 단어장 저장 · 단어 테스트 · 구글 로그인 · 반응형 웹
 
 
 ---
@@ -52,7 +43,7 @@
 ---
 
 ## 📁 폴더 구조
-
+```
 src/
 ├── assets/ # 이미지 및 공용 리소스
 ├── common/
@@ -72,6 +63,7 @@ src/
 ├── App.css
 ├── index.css
 ├── main.jsx
+```
 ---
 
 ## 👥 팀원 소개
