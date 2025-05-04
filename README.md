@@ -34,18 +34,33 @@
 
 ## 🛠️ 기술 스택 상세 설명
 
-| 기술             | 설명 |
-|------------------|------|
-| **React + Vite** | 빠른 개발 환경 및 번들링 성능을 위해 사용 |
-| **MUI**          | Material UI를 통한 반응형 UI 및 시각 일관성 유지 |
-| **React Router** | 페이지 이동을 위한 라우팅 처리 |
-| **Zustand**      | 간결하고 가벼운 글로벌 상태관리 도구 |
-| **Firebase Auth**| 회원가입, 로그인, 구글 OAuth 인증 처리 |
-| **Netlify**      | 정적 웹사이트 배포 및 서버리스 처리
+
+| 기술 스택             | 설명 |
+|------------------------|------|
+| **React + Vite**       | 빠른 개발환경과 최적화된 번들링 |
+| **MUI**                | 반응형 UI 구성 및 일관된 컴포넌트 스타일 |
+| **React Router v6**    | 페이지 라우팅 처리 |
+| **React Query**        | GPT API 및 웹 검색 결과의 상태 관리, 캐싱 |
+| **Zustand**            | 클라이언트 단 상태 관리 (단어장, 테스트 등) |
+| **Firebase Auth**      | 이메일/비밀번호 로그인 + Google OAuth |
+| **OpenAI API**         | GPT-4o-mini 및 GPT-4.1을 통한 기사 분석 및 단어 추출 |
+| **Netlify (Serverless)**| 정적 웹사이트 배포 및 서버리스 함수 연동
+
+---
+
+## 🤖 사용한 AI / 오픈소스 API
+
+- **OpenAI GPT-4o-mini / GPT-4.1 API**  
+  뉴스 기사에서 주요 단어 및 표현을 추출할 때 사용  
+  커스텀 프롬프트를 기반으로 `.netlify/functions/getResponse`, `getWebSearch` 함수를 통해 호출
+
+- **React Query (@tanstack/react-query)**  
+  GPT API 및 웹 검색 결과의 캐싱, 로딩 상태, 재시도 처리 등 클라이언트 상태 관리에 사용
 
 ---
 
 ## 📁 폴더 구조
+
 ```
 src/
 ├── assets/ # 이미지 및 공용 리소스
