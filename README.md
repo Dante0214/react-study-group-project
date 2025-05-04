@@ -12,7 +12,7 @@
 
 ## 👥 팀원 소개
 
-<table align="center">
+<table>
   <thead>
     <tr>
       <th>역할</th>
