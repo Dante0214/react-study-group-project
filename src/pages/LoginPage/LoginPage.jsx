@@ -1,4 +1,3 @@
-// LoginPage.js
 import React, { useState, useRef, useEffect } from 'react';
 import {
     Container,
@@ -24,7 +23,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import GoogleLoginButton from './../../common/components/Buttons/GoogleLoginButton';
 import { signInWithGooglePopup, signInWithEmail, createUser, updateUserProfile } from '../../util/firebase';
 import SignupModal from './components/SignupModal';
-import useSignupStore from '../../stores/signupStore'; // Import the signup store
+import PasswordResetModal from './components/PasswordResetModal';
+import useSignupStore from '../../stores/signupStore';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -38,6 +38,9 @@ const LoginPage = () => {
 
     // 회원가입 모달 상태
     const [openSignupModal, setOpenSignupModal] = useState(false);
+    // 비밀번호 재설정 모달 상태
+    const [openPasswordResetModal, setOpenPasswordResetModal] = useState(false);
+
     const {
         setNewName,
         setNewEmail,
@@ -45,6 +48,7 @@ const LoginPage = () => {
         setIsNewEmailValid,
         setIsNewPasswordValid,
         setNewPasswordConfirm,
+        setResetEmail,
     } = useSignupStore();
 
     useEffect(() => {
@@ -173,7 +177,16 @@ const LoginPage = () => {
             alert(errorMessage);
         }
     };
+    // 비밀번호 재설정 모달 열기 핸들러
+    const handleOpenPasswordResetModal = () => {
+        setOpenPasswordResetModal(true);
+        setResetEmail('');
+    };
 
+    // 비밀번호 재설정 모달 닫기 핸들러
+    const handleClosePasswordResetModal = () => {
+        setOpenPasswordResetModal(false);
+    };
     return (
         <Container
             component="main"
@@ -264,11 +277,13 @@ const LoginPage = () => {
                     <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
                         <Grid item xs>
                             <Link
-                                href="#"
+                                component="button" // Link를 button으로 변경하여 onClick 이벤트 사용
                                 variant="body2"
+                                onClick={handleOpenPasswordResetModal} // 비밀번호 찾기 클릭 시 모달 열기
                                 sx={{
                                     color: `var(--color-text-primary)`,
                                     textDecoration: 'none',
+                                    cursor: 'pointer',
                                 }}
                             >
                                 비밀번호 찾기
@@ -297,6 +312,8 @@ const LoginPage = () => {
 
             {/* 회원가입 모달 */}
             <SignupModal open={openSignupModal} onClose={handleCloseSignupModal} onSignup={handleSignup} />
+            {/* 비밀번호 재설정 모달 */}
+            <PasswordResetModal open={openPasswordResetModal} onClose={handleClosePasswordResetModal} />
         </Container>
     );
 };
