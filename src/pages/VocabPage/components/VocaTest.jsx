@@ -21,8 +21,17 @@ const VocabTest = ({ onExit }) => {
   // 테스트 상태: "prep" (준비), "session" (시험 중), "result" (결과)
   const [testState, setTestState] = useState("prep");
 
+  const shuffleArray = (array) => {
+    const newArr = [...array];
+    for (let i = newArr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+    }
+    return newArr;
+  };
+
   const startTest = () => {
-    const shuffled = [...myVocabList].sort(() => Math.random() - 0.5);
+    const shuffled = shuffleArray(myVocabList);
     setQuizList(shuffled);
     setCurrentIndex(0);
     setUserAnswer("");
