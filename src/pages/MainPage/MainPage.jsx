@@ -21,13 +21,12 @@ const MainPage = () => {
   // 프롬프트 생성 함수를 메모이제이션
   const getPrompt = useCallback((currentTopic) => {
     return `
-    주제: ${currentTopic}
     당신은 한국인들을 가르치는 영어선생님입니다. 
-    웹 검색을 통해 가장 최근의 기사를 찾아 한 페이지 분량으로 '영어로' 가져오세요.
+    Web search tool을 이용해, 주제: ${currentTopic}와 관련된 가장 최근의 기사를 찾아 500자~1000자 분량으로 '영어로' 가져오세요.
     중요한 핵심 표현 어휘를 단어(words)와 숙어(idioms)로 나누어 최대한 많이 선별해 정리해주세요. 
+    반드시 content 내용 중에 있는 어휘만 선별해주세요. 
+    어휘가 마땅히 없으면 빈 배열로 출력해주세요.
     meaning과 class는 한글로, 나머지 title이나 content 등은 꼭 영어로 제공해주세요.
-    반드시 내용 중에 있는 어휘만 선별해주세요. 없으면 빈 배열로 출력해주세요.
- 
     답변 형식은 다음과 같은 json 형식으로 출력해주세요.
   
     {
