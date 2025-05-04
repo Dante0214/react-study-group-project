@@ -11,7 +11,7 @@
 
 | 랜딩 | 로그인 | 기사 | 단어장 | 테스트 |
 |:--:|:--:|:--:|:--:|:--:|
-| ![랜딩](./public/screenshots/landing.jpeg) | ![로그인](./public/screenshots/login.jpeg) | ![기사](./public/screenshots/main.jpeg) | ![단어장](./public/screenshots/vocab.jpeg) | ![테스트](./public/screenshots/test.jpeg) |
+| ![랜딩](./public/screenshots/landing.png) | ![로그인](./public/screenshots/login.png) | ![기사](./public/screenshots/main.png) | ![단어장](./public/screenshots/vocab.png) | ![테스트](./public/screenshots/test.png) |
 
 > ✨ 주요 기능: 기사 기반 단어 학습 · 단어장 저장 · 단어 테스트 · 구글 로그인 · 반응형 웹
 
