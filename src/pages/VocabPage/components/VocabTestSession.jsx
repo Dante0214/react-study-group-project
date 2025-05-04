@@ -40,11 +40,6 @@ const VocabTestSession = ({
     }
   };
 
-  // showAnswer 상태가 변경될 때마다 로그 출력
-  useEffect(() => {
-    console.log("showAnswer 상태:", showAnswer);
-  }, [showAnswer]);
-
   // 타이머 설정
   useEffect(() => {
     if (showAnswer) return;
