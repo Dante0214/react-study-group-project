@@ -198,12 +198,12 @@ const VocabTestSession = ({
             남은 시간: {timeLeft}초
           </Typography>
 
-          <Box mt={3} display="flex" flexDirection="column">
+          <Box mt={1} display="flex" flexDirection="column">
             {showAnswer && (
               <Typography
                 variant="subtitle1"
-                color="primary"
-                sx={{ mb: 2, fontWeight: "bold" }}
+                color="warning"
+                sx={{ fontWeight: "bold" }}
               >
                 정답: <strong>{correctAnswer}</strong>
               </Typography>
