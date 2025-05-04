@@ -169,9 +169,8 @@ const VocabTestSession = ({
               color: "var(--color-text-primary)",
 
               fontSize: {
-                xs: "1.8rem",
+                xs: "1.6rem",
                 sm: "2.5rem",
-                md: "3rem",
               },
             }}
           >
