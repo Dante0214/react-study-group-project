@@ -21,54 +21,55 @@ const MainPage = () => {
   // 프롬프트 생성 함수를 메모이제이션
   const getPrompt = useCallback((currentTopic) => {
     return `
-    당신은 한국인들을 가르치는 영어선생님입니다. 
-    Web search tool을 이용해, 주제: ${currentTopic}와 관련된 가장 최근의 기사를 찾아 500자~1000자 분량으로 '영어로' 가져오세요.
-    중요한 핵심 표현 어휘를 단어(words)와 숙어(idioms)로 나누어 최대한 많이 선별해 정리해주세요. 
-    반드시 content 내용 중에 있는 어휘만 선별해주세요. 
-    특히 숙어 표현이 마땅히 없으면 content 내용 중에 주요 명사구 표현이라도 선별해주시고 정말 없다면 빈 배열로 출력해주세요.
-    meaning과 class는 한글로, 나머지 title이나 content 등은 꼭 영어로 제공해주세요.
-    답변 형식은 다음과 같은 json 형식으로 출력해주세요.
-  
-    {
-     title: "Title of the news",
-     content: "Content of the news(English, do not include the source)",
-     words: [{
-      name: "artificial intelligence"
-      meaning: "인공 지능"
-      class: "명사"
-      example: "I'm going to the AI conference next week." 
-      }, {
-      name: "revolutionize"
-      meaning: "혁신하다"
-      class: "동사"
-      example: "The new AI model will revolutionize the industry." 
-      }, {
-      name: "healthcare delivery"
-      meaning: "의료 서비스 제공"
-      class: "명사"
-      example: "The new candidate will support the healthcare delivery system." 
-      } ...],
-     idioms: [{
-      name: "break a leg"
-      meaning: "좋은 성과를 내다"
-      class: "동사"
-      example: "I'm sure you'll break a leg at the interview."
-      }, {
-      name: "hit the books"
-      meaning: "공부하다"
-      class: "동사"
-      example: "I'm going to hit the books for the exam."
-      } ...],
-     date: "기사 날짜",
-     source: {
-       name: "기사 출처",
-       url: "기사 출처 URL"
-      }
-    }
+당신은 한국인들을 가르치는 영어선생님입니다. 
 
-    응답은 반드시 텍스트로만 제공하세요.
-    받은 응답은 json 형식으로 파싱할 것이므로
-    절대로 다른 텍스트나 코드블럭이나 백틱을 출력하지 마세요.
+Web search tool을 이용해, 주제: {topic}와 관련된 가장 최근의 기사를 찾아 500자~1000자 분량으로 '영어로' 가져오세요.
+
+기사에서 사용된 중요한 어휘와 표현을 다음과 같이 정리해주세요:
+1. 단어(words): 영어 학습에 유용한 핵심 단어들 (명사, 동사, 형용사, 부사 등)
+2. 숙어(idioms): 기사에 등장한 관용구, 숙어 표현, 또는 주요 명사구/동사구 표현
+
+다음 가이드라인을 반드시 따라주세요:
+- 반드시 기사 내용에 실제로 등장한 표현만 선별할 것
+- 각 단어/숙어마다 한글 의미와 품사, 예문 제공
+- 숙어 표현이 없을 경우 중요 구문이라도 추출하고, 정말 없다면 빈 배열로 표시
+- 제목(title)과 내용(content)은 영어로, 의미(meaning)와 품사(class)는 한글로 제공
+- 예문은 기사 내용과 연관되게 작성하거나 실제 기사에서 발췌
+
+응답은 다음 JSON 형식으로만 제공하세요:
+
+{
+  "title": "기사 제목 (영어)",
+  "content": "기사 내용 (영어, 출처 문구 제외)",
+  "words": [
+    {
+      "name": "단어",
+      "meaning": "한글 의미",
+      "class": "품사 (한글)",
+      "example": "예문 (영어)"
+    },
+    ...
+  ],
+  "idioms": [
+    {
+      "name": "숙어/구문",
+      "meaning": "한글 의미",
+      "class": "품사/구분 (한글)",
+      "example": "예문 (영어)"
+    },
+    ...
+  ],
+  "date": "기사 발행일",
+  "source": {
+    "name": "출처 이름",
+    "url": "기사 URL"
+  }
+}
+
+주의사항:
+- JSON 형식 외의 어떤 텍스트나 코드 블록, 백틱도 포함하지 마세요
+- 응답은 파싱되어 사용될 것이므로 정확한 JSON 형식을 유지해야 합니다
+- 반드시 현재 존재하는 기사를 검색해주고 그 출처와 발행 날짜를 정확히 기재해주세요
     `;
   }, []);
 
