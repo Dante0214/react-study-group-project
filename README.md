@@ -10,6 +10,33 @@
 
 ---
 
+## 👥 팀원 소개
+
+<table align="center">
+  <thead>
+    <tr>
+      <th>역할</th>
+      <th>PO</th>
+      <th>SM</th>
+      <th>Developer</th>
+      <th>Developer</th>
+      <th>Developer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>이름</td>
+      <td>한상휘</td>
+      <td>한사라</td>
+      <td>안치호</td>
+      <td>정민지</td>
+      <td>박영욱</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
 ## 📱 모바일 UI 미리보기
 
 | 랜딩 | 로그인 | 기사 | 단어장 | 테스트 |
@@ -82,16 +109,6 @@ src/
 ├── index.css
 ├── main.jsx
 ```
----
-
-## 👥 팀원 소개
-
-| 역할         | 이름             |
-|--------------|------------------|
-| PO           | 한상휘           |
-| SM           | 한사라           |
-| Developer    | 안치호, 정민지, 박영욱 |
-
 ---
 
 ## 🚀 사용법
